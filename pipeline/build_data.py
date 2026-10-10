@@ -1,67 +1,47 @@
-"""
-UPI MDR Impact Simulator - data pipeline.
-
-One command does what notebooks 01-05 did by hand:
-    raw CSVs  ->  checks  ->  DuckDB tables  ->  scenario engine  ->  JSON for the website
-
-Run from the project folder:
-    python pipeline/build_data.py
-
-GitHub Actions runs this same file automatically (see .github/workflows/refresh-data.yml).
-"""
-
 import json
 from pathlib import Path
-
 import duckdb
 import pandas as pd
 
-# ---------- folders ----------
-ROOT = Path(__file__).resolve().parent.parent  # the project folder
+ROOT = Path(__file__).resolve().parent.parent  
 RAW = ROOT / "data" / "raw"  # input CSVs
-OUT = ROOT / "web" / "public" / "data"  # the website reads JSON from here
-DB = ROOT / "data" / "fintech.duckdb"  # local database (not committed)
+OUT = ROOT / "web" / "public" / "data"  
+DB = ROOT / "data" / "fintech.duckdb"  
 
 FY_END = "2027-03-31"  # end of financial year 2026-27
 
 
-# ---------- step 1: acquire (notebook 01) ----------
+# acquire
 def load_monthly() -> pd.DataFrame:
     data = pd.read_csv(RAW / "upi_monthly_npci_reported.csv")  # one row per month
-    data["month"] = pd.to_datetime(data["month"] + "-01")  # 2025-09 -> 2025-09-01
-    data["volume_mn"] = data["volume_bn"] * 1000  # billion -> million
+    data["month"] = pd.to_datetime(data["month"] + "-01")  # change 2025-09 -> 2025-09-01
+    data["volume_mn"] = data["volume_bn"] * 1000  # converts billion to million
     data["value_cr"] = data["value_lakh_cr"] * 100000  # lakh crore -> crore
     data["avg_ticket_inr"] = (data["value_cr"] * 1e7) / (data["volume_mn"] * 1e6)  # rupees per payment
     return data
 
 
-# ---------- step 2: clean and check (notebook 02) ----------
+# clean and check
 def check_monthly(data: pd.DataFrame) -> pd.DataFrame:
-    # numbers must not be missing
     assert data[["volume_bn", "value_lakh_cr"]].notna().all().all(), "missing monthly numbers"
-    # each month once
     assert not data["month"].duplicated().any(), "duplicate months"
-    # no gaps between first and last month
     months = pd.date_range(data["month"].min(), data["month"].max(), freq="MS")
     assert set(months) == set(data["month"]), "gap in the monthly series"
 
     data = data.sort_values("month").reset_index(drop=True)
     data["volume_mom_pct"] = data["volume_mn"].pct_change() * 100  # % change in volume
     data["value_mom_pct"] = data["value_cr"].pct_change() * 100  # % change in value
-    # a jump above 15% is usually a typo or a wrong unit
-    data["check_me"] = (data["volume_mom_pct"].abs() > 15) | (data["value_mom_pct"].abs() > 15)
+    data["check_me"] = (data["volume_mom_pct"].abs() > 15) | (data["value_mom_pct"].abs() > 15) # a jump above 15% is usually a typo or a wrong unit
     if data["check_me"].any():
         print("WARNING - check these months:", data.loc[data["check_me"], "month"].dt.strftime("%Y-%m").tolist())
     return data
 
 
 def load_policy() -> pd.DataFrame:
-    data = pd.read_csv(RAW / "mdr_policy_parameters.csv", dtype=str)  # one row per rule
-    data["value_num"] = pd.to_numeric(data["value"], errors="coerce")  # numbers survive
-    data["value_date"] = pd.to_datetime(data["value"], errors="coerce", format="%Y-%m-%d")  # dates survive
-    # every rule is either a number or a date
+    data = pd.read_csv(RAW / "mdr_policy_parameters.csv", dtype=str)  
+    data["value_num"] = pd.to_numeric(data["value"], errors="coerce")  
+    data["value_date"] = pd.to_datetime(data["value"], errors="coerce", format="%Y-%m-%d")  
     assert (data["value_num"].notna() ^ data["value_date"].notna()).all(), "a rule has no usable value"
-    # only three status labels allowed
     assert set(data["status"]) <= {"confirmed", "reported", "unverified"}, "unknown status label"
     data["status_note"] = data["status_note"].fillna("")
     return data
@@ -75,7 +55,7 @@ def load_bands() -> pd.DataFrame:
     return data
 
 
-# ---------- step 3: store in DuckDB and run SQL (notebook 03) ----------
+# store in DuckDB and run SQL
 def to_duckdb(monthly: pd.DataFrame, policy: pd.DataFrame, bands: pd.DataFrame) -> duckdb.DuckDBPyConnection:
     con = duckdb.connect(str(DB))
     con.execute("CREATE OR REPLACE TABLE upi_monthly_clean AS SELECT * FROM monthly")
@@ -83,15 +63,14 @@ def to_duckdb(monthly: pd.DataFrame, policy: pd.DataFrame, bands: pd.DataFrame) 
     con.execute("CREATE OR REPLACE TABLE p2m_bands AS SELECT * FROM bands")
     return con
 
-
-# ---------- step 4: scenario engine (notebook 04) ----------
+# scenario engine 
 def standard_fee_cr(value_cr, rate_pct):
     return value_cr * rate_pct / 100  # 0.4% of the value
 
 
 def flat_fee_cr(value_cr, avg_ticket_inr, fee_inr):
-    count = value_cr * 1e7 / avg_ticket_inr  # how many payments
-    return count * fee_inr / 1e7  # back into crore
+    count = value_cr * 1e7 / avg_ticket_inr  
+    return count * fee_inr / 1e7  
 
 
 def capped_fee_cr(value_cr, avg_ticket_inr, rate_pct, cap_inr):
@@ -155,7 +134,6 @@ def build_scenarios(policy: pd.DataFrame) -> list[dict]:
         "split_app_pct": rule("split_app"),
         "split_payer_psp_pct": rule("split_payer_psp"),
     }
-    # whole numbers stay whole in the JSON (40, not 40.0)
     base = {k: (int(v) if isinstance(v, float) and v.is_integer() else v) for k, v in base.items()}
     return [
         base,
@@ -176,7 +154,7 @@ def self_test(scenarios, base_cr, p2m_cr):
     assert run_scenario(scenarios[1], base_cr, p2m_cr)["pool_fy27_cr"] < r["pool_fy27_cr"], "later start should raise less"
 
 
-# ---------- step 5: export JSON for the website (notebook 05) ----------
+# export JSON for the website
 def save_json(data: pd.DataFrame, name: str):
     path = OUT / f"{name}.json"
     data.to_json(path, orient="records", indent=2, force_ascii=False)
@@ -215,7 +193,7 @@ def export(con, scenarios, results, start_date_status, data_updated):
 
     meta = {
         "project": "UPI MDR Impact Simulator",
-        "data_updated": data_updated,  # newest source date, so the file only changes when data does
+        "data_updated": data_updated,  
         "start_date_status": start_date_status,
         "disclaimer": "Analysis and education only. Not investment, legal or business advice.",
     }
@@ -241,7 +219,6 @@ def main():
     results = [run_scenario(s, base_cr, p2m_cr) for s in scenarios]
     print(f"  base: ₹{results[0]['pool_month_cr']:,.0f} cr a month, ₹{results[0]['pool_fy27_cr']:,.0f} cr in FY 2026-27")
 
-    # the start-date note comes from the policy file, so updating one CSV row updates the site
     alt = policy.loc[policy["parameter"] == "start_date_alternative"].iloc[0]
     status = f"15 Oct 2026 scheduled; delay to 1 Jan 2027 {alt['status']} ({alt['status_note']})"
 
