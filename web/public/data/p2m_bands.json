@@ -1,0 +1,26 @@
+[
+  {
+    "month":"2026-08",
+    "band":"0-500",
+    "share_of_p2m_value_pct":16,
+    "band_value_cr":143200.0,
+    "source":"NPCI via Business Today, 17 Sep 2026",
+    "status":"reported"
+  },
+  {
+    "month":"2026-08",
+    "band":"501-2000",
+    "share_of_p2m_value_pct":17,
+    "band_value_cr":152150.0,
+    "source":"NPCI via Business Today, 17 Sep 2026",
+    "status":"reported"
+  },
+  {
+    "month":"2026-08",
+    "band":"above_2000",
+    "share_of_p2m_value_pct":67,
+    "band_value_cr":599650.0,
+    "source":"NPCI via Business Today, 17 Sep 2026",
+    "status":"reported"
+  }
+]

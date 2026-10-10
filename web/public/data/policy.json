@@ -1,0 +1,146 @@
+[
+  {
+    "parameter":"cap_reached_at",
+    "value":"75000",
+    "unit":"INR per transaction",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"derived: 300 \/ 0.004",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"capital_markets_rate",
+    "value":"0.02",
+    "unit":"percent (cap 300)",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (DFS\/NPCI FAQ 15 Sep) - not re-checked today",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"flat_fee_sectors",
+    "value":"5",
+    "unit":"INR per transaction above 2000 (railways telecom insurance fuel)",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"NPCI statement via ANI \/ Khaleej Times",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"gst_on_mdr",
+    "value":"18",
+    "unit":"percent",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (reported)",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"mdr_cap",
+    "value":"300",
+    "unit":"INR per transaction",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"NPCI statement via ANI \/ Khaleej Times",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"mdr_rate_standard",
+    "value":"0.4",
+    "unit":"percent",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"NPCI statement via ANI \/ Khaleej Times",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"p2m_volume_share_at_or_below_2000",
+    "value":"95",
+    "unit":"percent of merchant txn volume (more than)",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"NPCI FAQ via SCC Online",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"p2pm_receipt_limit",
+    "value":"100000",
+    "unit":"INR per month (3 consecutive months above -> regular P2M)",
+    "status":"reported",
+    "status_note":"",
+    "source":"Kotak Neo \/ Inc42",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"split_acquirer",
+    "value":"30",
+    "unit":"percent of MDR",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (reported)",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"split_app",
+    "value":"20",
+    "unit":"percent of MDR",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (reported)",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"split_issuer",
+    "value":"40",
+    "unit":"percent of MDR",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (reported)",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"split_payer_psp",
+    "value":"10",
+    "unit":"percent of MDR",
+    "status":"unverified",
+    "status_note":"",
+    "source":"earlier reports (reported)",
+    "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"start_date",
+    "value":"2026-10-15",
+    "unit":"date",
+    "status":"confirmed",
+    "status_note":"scheduled",
+    "source":"NPCI FAQ via SCC Online",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"start_date_alternative",
+    "value":"2027-01-01",
+    "unit":"date",
+    "status":"reported",
+    "status_note":"NPCI decision pending as of 10 Oct 2026",
+    "source":"BusinessToday \/ Moneycontrol; BW Businessworld",
+    "as_of":"2026-10-10"
+  },
+  {
+    "parameter":"threshold_amount",
+    "value":"2000",
+    "unit":"INR per transaction (MDR applies above)",
+    "status":"confirmed",
+    "status_note":"",
+    "source":"NPCI statement via ANI \/ Khaleej Times",
+    "as_of":"2026-09-16"
+  },
+  {
+    "parameter":"turnover_exemption",
+    "value":"4000000",
+    "unit":"INR annual turnover (40 lakh)",
+    "status":"reported",
+    "status_note":"under consideration",
+    "source":"SAG Infotech citing reports",
+    "as_of":"2026-10-08"
+  }
+]

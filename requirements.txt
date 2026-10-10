@@ -1,0 +1,6 @@
+# for the notebooks (Colab or local Jupyter)
+pandas
+duckdb
+openpyxl
+jupyter
+ipykernel

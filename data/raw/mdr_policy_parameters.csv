@@ -1,0 +1,17 @@
+parameter,value,unit,status,source,as_of,status_note
+mdr_rate_standard,0.4,percent,confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
+threshold_amount,2000,INR per transaction (MDR applies above),confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
+mdr_cap,300,INR per transaction,confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
+cap_reached_at,75000,INR per transaction,confirmed,derived: 300 / 0.004,2026-09-16,
+flat_fee_sectors,5,INR per transaction above 2000 (railways telecom insurance fuel),confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
+capital_markets_rate,0.02,percent (cap 300),unverified,fintech skill baseline (DFS/NPCI FAQ 15 Sep) - not re-checked today,2026-09-15,
+p2pm_receipt_limit,100000,INR per month (3 consecutive months above -> regular P2M),reported,Kotak Neo / Inc42,2026-09-16,
+start_date,2026-10-15,date,confirmed,NPCI FAQ via SCC Online,2026-09-16,scheduled
+start_date_alternative,2027-01-01,date,reported,"BusinessToday / Moneycontrol; BW Businessworld",2026-10-10,NPCI decision pending as of 10 Oct 2026
+turnover_exemption,4000000,INR annual turnover (40 lakh),reported,SAG Infotech citing reports,2026-10-08,under consideration
+split_acquirer,30,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,
+split_issuer,40,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,
+split_payer_psp,10,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,
+split_app,20,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,
+gst_on_mdr,18,percent,unverified,fintech skill baseline (reported),2026-09-15,
+p2m_volume_share_at_or_below_2000,95,percent of merchant txn volume (more than),confirmed,NPCI FAQ via SCC Online,2026-09-16,

@@ -1,0 +1,14 @@
+month,volume_bn,value_lakh_cr,source_name,source_url,note
+2025-09,19.63,24.90,StartupTalky (citing NPCI),https://startuptalky.com/upi-transactions-september-2026/,YoY comparison column in Sep 2026 article
+2025-10,20.70,27.28,IANS (citing NPCI),https://ianslive.in/gst-20-booster-upi-sees-2070-billion-transactions-in-oct-worth-rs-2728-lakh-crore--20251101100604,
+2025-11,20.47,26.32,IANS (citing NPCI),https://ianslive.in/upi-transactions-grow-32-pc-in-nov-as-consumption-remains-robust--20251201100446,
+2025-12,21.63,27.97,Business Today,https://www.businesstoday.in/technology/news/story/upi-ends-2025-on-a-high-with-record-monthly-and-annual-transactions-with-plans-for-future-initiatives-509218-2026-01-02,article does not name its data source
+2026-01,21.70,28.33,Entrackr (citing NPCI),https://entrackr.com/news/upi-sets-new-monthly-record-with-217-bn-transactions-in-january-11063663,volume rounded to 1 decimal in source
+2026-02,20.39,26.84,Inc42 (citing NPCI),https://inc42.com/?p=550893,
+2026-03,22.64,29.53,IANS via Investment Guru India (citing NPCI),https://investmentguruindia.com/newsdetail/upi-hits-record-22-64-billion-transactions-in-march-npci-data165049,another outlet reports 29.52
+2026-04,22.35,29.03,The Statesman,https://www.thestatesman.com/business/upi-sees-25-pc-growth-at-22-35-billion-transactions-in-april-starts-fy27-on-strong-note-1503588302.html,taken from headline; not opened
+2026-05,23.20,29.90,PTI via Deccan Chronicle (citing NPCI),https://deccanchronicle.com/business/upi-transactions-hit-record-299-lakh-crore-in-may-1960512,
+2026-06,22.72,28.92,StartupTalky (citing NPCI),https://startuptalky.com/upi-transactions-june-2026-data-strong-growth-despite-monthly-dip/,
+2026-07,23.66,29.88,Sahi (citing NPCI),https://www.sahi.com/news/npci-introduces-0-4-mdr-on-upi-merchant-transactions-over-2-000-from-october-15,
+2026-08,24.51,29.82,StartupTalky (citing NPCI),https://startuptalky.com/upi-transactions-september-2026/,
+2026-09,24.07,29.37,StartupTalky (citing NPCI),https://startuptalky.com/upi-transactions-september-2026/,

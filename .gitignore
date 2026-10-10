@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# local database (rebuilt by the pipeline)
+data/*.duckdb
+
+# secrets
+.env
+.env.local
+web/.env.local

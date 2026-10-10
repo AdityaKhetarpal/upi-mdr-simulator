@@ -1,0 +1,33 @@
+# Every Monday (and on demand), re-run the pipeline. If the website data changed,
+# open a pull request so a human reviews the new numbers before they go live.
+name: Refresh data
+
+on:
+  schedule:
+    - cron: "30 3 * * 1" # Mondays 03:30 UTC = 09:00 IST
+  workflow_dispatch: # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -r pipeline/requirements.txt
+      - run: python pipeline/build_data.py
+
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: data-refresh
+          commit-message: "Refresh website data"
+          title: "Weekly data refresh"
+          body: |
+            The pipeline re-ran `pipeline/build_data.py` and the website data changed.
+            Check the numbers in `web/public/data/` before merging.
+          add-paths: web/public/data/*.json

@@ -1,0 +1,33 @@
+# Runs on every push: rebuild the data, test the maths, build the website.
+# If any step fails, GitHub marks the commit red and Vercel's deploy can be held back.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # 1. Data pipeline: raw CSVs -> checks -> scenario engine -> JSON
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -r pipeline/requirements.txt
+      - run: python pipeline/build_data.py
+
+      # 2. Website: tests (TypeScript engine must match Python) and production build
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm test
+        working-directory: web
+      - run: npm run build
+        working-directory: web
