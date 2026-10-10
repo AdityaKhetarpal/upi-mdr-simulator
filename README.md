@@ -2,7 +2,7 @@
 
 How much India's new UPI merchant fee costs a payment, how much it raises nationally, and who gets paid.
 
-**Live site:** [X] (add the Vercel link after deploying)
+**Live site:** [https://upi-mdr-simulator.vercel.app/
 
 ## The problem
 
