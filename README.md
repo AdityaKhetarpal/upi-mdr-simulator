@@ -46,13 +46,14 @@ data/raw/*.csv ──► checks ──► DuckDB + SQL ──► scenario engine
 
 ## Automation
 
-- `.github/workflows/ci.yml`: on every push, runs the data pipeline, the 22 website tests and a production build.
+- `.github/workflows/ci.yml`: on every push, runs the data pipeline, the 26 website tests and a production build.
 - `.github/workflows/refresh-data.yml`: every Monday (or on demand), re-runs the pipeline and opens a pull request if the website data changed, so a person reviews new numbers before they go live.
 
 ## Generative AI: Ask the data
 
 - `web/app/api/ask/route.ts` sends the question plus this project's data (about 1,300 tokens) to `claude-haiku-5-5`.
 - The system prompt (`web/lib/ask.ts`) limits answers to the supplied data, requires a source block like `[RULES]`, requires flagging reported or unverified figures, and refuses advice.
+- **Works without a key:** common questions (fee on any payment amount, January start, revenue split, yearly total, what's confirmed) are answered instantly from the data by `web/lib/quick-answer.ts`. The AI is used only for other questions, and the site falls back to data answers if the AI fails or a visitor hits the rate limit.
 - Safeguards: the API key stays on the server, questions are limited to 300 characters, and each visitor gets 8 questions per 10 minutes. Set a monthly spend cap in the Anthropic console.
 - **Evaluation:** `web/evals/ask_eval.json` holds 10 questions (7 facts, 1 uncertainty, 2 refusals). Run `npm run eval` with the site running. Latest score: [X]/10 passed, [X]/8 factual answers cited a source.
 

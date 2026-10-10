@@ -3,6 +3,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { buildContext, SYSTEM_PROMPT, validateQuestion } from "@/lib/ask";
+import { quickAnswer } from "@/lib/quick-answer";
 
 export const maxDuration = 30; // seconds; the answer is short, so this is plenty
 
@@ -21,22 +22,29 @@ function allowed(ip: string): boolean {
   return true;
 }
 
+// Reply worked out from the data alone (no AI)
+function fromData(question: string) {
+  const answer = quickAnswer(question);
+  if (answer) return Response.json({ answer, via: "data" });
+  return Response.json({
+    answer:
+      "I can answer this one only with the AI switched on. Without it, I can work out the fee on any payment amount, the effect of a January start, who receives the fee, the yearly total, and which numbers are confirmed. Try one of the example questions.",
+    via: "data",
+  });
+}
+
 export async function POST(request: Request) {
-  // 1. Is the feature switched on?
-  if (!process.env.ANTHROPIC_API_KEY) {
-    return Response.json({ error: "Ask the data isn't switched on for this site yet." }, { status: 503 });
-  }
-
-  // 2. Rate limit by visitor IP
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (!allowed(ip)) {
-    return Response.json({ error: `You've asked ${LIMIT} questions in 10 minutes. Try again shortly.` }, { status: 429 });
-  }
-
-  // 3. Check the question
+  // 1. Check the question
   const body = await request.json().catch(() => ({}));
   const check = validateQuestion(body?.question);
   if (!check.ok) return Response.json({ error: check.error }, { status: 400 });
+
+  // 2. No AI key set: answer from the data instead
+  if (!process.env.ANTHROPIC_API_KEY) return fromData(check.question);
+
+  // 3. Rate limit AI calls by visitor IP
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  if (!allowed(ip)) return fromData(check.question);
 
   // 4. Ask the model, giving it only our data
   try {
@@ -57,9 +65,9 @@ export async function POST(request: Request) {
     // token use goes to the server log, so cost can be tracked
     console.log(`[ask] model=${MODEL} in=${message.usage.input_tokens} out=${message.usage.output_tokens}`);
 
-    return Response.json({ answer, model: MODEL });
+    return Response.json({ answer, via: "ai", model: MODEL });
   } catch (err) {
-    console.error("[ask] failed:", err);
-    return Response.json({ error: "The AI service didn't respond. Try again in a minute." }, { status: 502 });
+    console.error("[ask] AI failed, answering from data:", err);
+    return fromData(check.question); // the visitor still gets an answer
   }
 }

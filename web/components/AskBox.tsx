@@ -10,7 +10,7 @@ const SUGGESTIONS = [
   "Who receives the fee, and how is it split?",
 ];
 
-type Turn = { question: string; answer?: string; error?: string };
+type Turn = { question: string; answer?: string; error?: string; via?: "ai" | "data" };
 
 export default function AskBox() {
   const [question, setQuestion] = useState("");
@@ -29,7 +29,7 @@ export default function AskBox() {
         body: JSON.stringify({ question: text }),
       });
       const data = await res.json();
-      setTurns((t) => [{ question: text, answer: data.answer, error: data.error }, ...t]);
+      setTurns((t) => [{ question: text, answer: data.answer, error: data.error, via: data.via }, ...t]);
     } catch {
       setTurns((t) => [{ question: text, error: "Couldn't reach the site. Check your connection and try again." }, ...t]);
     } finally {
@@ -81,6 +81,9 @@ export default function AskBox() {
           <article className="panel answer" key={turns.length - i}>
             <p className="answer-q">{t.question}</p>
             {t.answer && <p className="answer-a">{t.answer}</p>}
+            {t.via && (
+              <p className="answer-via">{t.via === "ai" ? "Answered by Claude Haiku from this site's data" : "Worked out directly from this site's data"}</p>
+            )}
             {t.error && <p className="warning">{t.error}</p>}
           </article>
         ))}

@@ -39,3 +39,26 @@ describe("data given to the AI", () => {
     expect(SYSTEM_PROMPT).toContain("not investment");
   });
 });
+
+import { findAmount, quickAnswer } from "./quick-answer";
+
+describe("instant answers without AI", () => {
+  it("reads amounts written in different ways", () => {
+    expect(findAmount("a ₹50,000 payment")).toBe(50000);
+    expect(findAmount("1.5 lakh sale")).toBe(150000);
+    expect(findAmount("pay 2500 at a shop")).toBe(2500);
+  });
+  it("works out the fee on a payment", () => {
+    expect(quickAnswer("How much would a shop pay on a ₹50,000 UPI payment?")).toContain("₹200.00");
+    expect(quickAnswer("fee on ₹1,500?")).toContain("No fee");
+    expect(quickAnswer("petrol pump payment of ₹10,000")).toContain("₹5.00");
+  });
+  it("answers each example question", () => {
+    expect(quickAnswer("What happens to this year's total if the start moves to January?")).toContain("₹5,323 crore");
+    expect(quickAnswer("Which numbers here are confirmed and which are assumptions?")).toContain("Unverified");
+    expect(quickAnswer("Who receives the fee, and how is it split?")).toContain("40%");
+  });
+  it("says so when it can't answer without AI", () => {
+    expect(quickAnswer("What will the weather be tomorrow?")).toBeNull();
+  });
+});
