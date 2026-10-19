@@ -23,7 +23,7 @@ describe("fee functions", () => {
   });
 });
 
-describe("matches Python for all 5 scenarios", () => {
+describe("matches Python for every scenario", () => {
   (inputs as Scenario[]).forEach((s, i) => {
     it(s.name, () => {
       const ts = runScenario(s, BASE_CR, P2M_CR);

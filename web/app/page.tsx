@@ -27,8 +27,9 @@ const RULES: [string, string, (v: string) => string][] = [
   ["mdr_cap", "Maximum fee per payment", (v) => `₹${v}, reached at ₹75,000`],
   ["flat_fee_sectors", "Fuel, telecom, insurance, rail", (v) => `Flat ₹${v} per payment above ₹2,000`],
   ["p2pm_receipt_limit", "Small merchants stay free", (v) => `Until they receive ₹${Number(v).toLocaleString("en-IN")}+ a month for 3 months`],
-  ["start_date", "Start date", (v) => dateText(v)],
-  ["start_date_alternative", "Possible later start", (v) => dateText(v)],
+  ["start_date_original", "Original start date", (v) => `${dateText(v)} (deferred)`],
+  ["start_date", "New start date", (v) => `After Diwali, to be notified (${dateText(v)} assumed)`],
+  ["start_date_alternative", "If delayed again", (v) => dateText(v)],
   ["turnover_exemption", "Turnover exemption", () => "Businesses under ₹40 lakh a year"],
   ["gst_on_mdr", "GST on the fee", (v) => `${v}% on top of the fee`],
 ];
@@ -54,8 +55,8 @@ export default function Home() {
       {/* ---------- hero: one payment ---------- */}
       <h1>Above ₹2,000, UPI stops being free for merchants.</h1>
       <p className="lead">
-        A 0.4% merchant fee starts on 15 October 2026, or 1 January 2027 if NPCI&apos;s reported delay goes ahead.
-        Customers still pay nothing. Try a payment to see what the shop pays.
+        A 0.4% merchant fee was due on 15 October 2026. On 13 October NPCI deferred it to &ldquo;immediately post Diwali&rdquo;,
+        on a date still to be notified. The rates did not change, and customers still pay nothing. Try a payment to see what the shop pays.
       </p>
       <FeeCalculator />
 

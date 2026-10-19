@@ -6,7 +6,7 @@ How much India's new UPI merchant fee costs a payment, how much it raises nation
 
 ## The problem
 
-From 15 October 2026 (possibly delayed to 1 January 2027), merchants pay a 0.4% merchant discount rate (MDR) on UPI payments above ₹2,000, capped at ₹300, with a flat ₹5 for fuel, telecom, insurance and railways. Customers still pay nothing. Merchants, fintech analysts and policy readers need to know three things: what one payment costs, how big the total fee pool is, and how confident we can be in each number.
+Merchants will pay a 0.4% merchant discount rate (MDR) on UPI payments above ₹2,000, capped at ₹300, with a flat ₹5 for fuel, telecom, insurance and railways. Customers still pay nothing. The fee was due on 15 October 2026; on 13 October NPCI deferred it to "immediately post Diwali", on a date still to be notified, with no change to the rates. Merchants, fintech analysts and policy readers need to know three things: what one payment costs, how big the total fee pool is, and how confident we can be in each number.
 
 ## Who it's for
 
@@ -42,7 +42,7 @@ data/raw/*.csv ──► checks ──► DuckDB + SQL ──► scenario engine
 
 - **Checks** stop the pipeline on missing or repeated months, gaps, shares that don't add to 100%, or unknown status labels.
 - **Scenario engine** splits above-₹2,000 P2M value into standard (0.4%), capped (₹300) and flat (₹5) parts, removes exempt merchants and value moved off UPI, then computes the monthly pool, the FY 2026-27 total, GST and each player's share.
-- **The website's TypeScript engine** is tested to give the same answers as the Python engine on all five scenarios.
+- **The website's TypeScript engine** is tested to give the same answers as the Python engine on every scenario.
 
 ## Automation
 
@@ -55,12 +55,12 @@ data/raw/*.csv ──► checks ──► DuckDB + SQL ──► scenario engine
 - The system prompt (`web/lib/ask.ts`) limits answers to the supplied data, requires a source block like `[RULES]`, requires flagging reported or unverified figures, and refuses advice.
 - **Works without a key:** common questions (fee on any payment amount, January start, revenue split, yearly total, what's confirmed) are answered instantly from the data by `web/lib/quick-answer.ts`. The AI is used only for other questions, and the site falls back to data answers if the AI fails or a visitor hits the rate limit.
 - Safeguards: the API key stays on the server, questions are limited to 300 characters, and each visitor gets 8 questions per 10 minutes. Set a monthly spend cap in the Anthropic console.
-- **Evaluation:** `web/evals/ask_eval.json` holds 10 questions (7 facts, 1 uncertainty, 2 refusals). Run `npm run eval` with the site running. Latest score: [X]/10 passed, [X]/8 factual answers cited a source.
+- **Evaluation:** `web/evals/ask_eval.json` holds 11 questions (8 facts, 1 uncertainty, 2 refusals). Run `npm run eval` with the site running. Latest score: [X]/11 passed, [X]/9 factual answers cited a source.
 
 ## Results (base scenario, estimates not forecasts)
 
 - Fee pool: **₹1,799 crore a month**, ₹21,587 crore a year (range ₹13,672 to ₹25,905 crore depending on assumptions).
-- FY 2026-27: ₹9,936 crore with a 15 Oct start, ₹5,323 crore if delayed to 1 Jan 2027.
+- FY 2026-27: ₹8,458 crore with a post-Diwali start (9 Nov 2026 assumed), ₹5,323 crore if delayed again to 1 Jan 2027, against ₹9,936 crore under the original 15 Oct plan.
 - Merchants pay about **0.20% of all UPI takings**, not 0.4%, because 33% of P2M value is in payments of ₹2,000 or less.
 
 ## Limitations

@@ -55,6 +55,7 @@ describe("instant answers without AI", () => {
   });
   it("answers each example question", () => {
     expect(quickAnswer("What happens to this year's total if the start moves to January?")).toContain("₹5,323 crore");
+    expect(quickAnswer("When does the UPI MDR start now?")).toContain("post Diwali");
     expect(quickAnswer("Which numbers here are confirmed and which are assumptions?")).toContain("Unverified");
     expect(quickAnswer("Who receives the fee, and how is it split?")).toContain("40%");
   });

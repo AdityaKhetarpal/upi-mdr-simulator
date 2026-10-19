@@ -35,3 +35,9 @@ Log of every file in `data/raw/`: where it came from, when, and its status.
 
 ## Start-date check log
 - 10 Oct 2026: NPCI decision on deferral to 1 Jan 2027 still not announced (BW Businessworld, Kotak Neo). `start_date_alternative` kept as reported.
+
+### Update, 19 Oct 2026: the deferral
+- **13 Oct 2026:** NPCI's UPI and Services Steering Committee deferred the MDR, due 15 Oct, to "immediately post Diwali at a date to be notified separately"; a source said there is no change to the MDR structure. [Business Standard](https://www.business-standard.com/finance/news/upi-mdr-deferred-until-after-diwali-new-date-to-be-notified-npci-126101300556_1.html), [MediaNama](https://www.medianama.com/2026/10/223-npci-delays-upi-mdr-festive-season/), [WION](https://www.wionews.com/india-news/npci-postpones-upi-mdr-charges-rollout-to-post-diwali-second-week-of-november-1791882766290/amp) (second week of November).
+- `start_date` is now 9 Nov 2026, the day after Diwali, labelled **reported** because NPCI has not notified the exact date. `start_date_original` (15 Oct) is kept for comparison.
+- `start_date_alternative` (1 Jan 2027): merchant bodies had asked for January 2027 (MediaNama); kept as a further-delay scenario.
+- Flat ₹5 sectors and the 0.02% capital-markets rate re-checked against [Organiser, 14 Oct 2026](https://organiser.org/2026/10/14/386311/bharat/mdr-on-upi-transactions-till-rs-2000-postponed-govts-digital-payments-push-remains-focused-on-accessibility/).

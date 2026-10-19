@@ -116,13 +116,17 @@ def run_scenario(s, base_cr, p2m_cr):
 
 def build_scenarios(policy: pd.DataFrame) -> list[dict]:
     rule = lambda name: float(policy.loc[policy["parameter"] == name, "value_num"].iloc[0])  # noqa: E731
+    date = lambda name: policy.loc[policy["parameter"] == name, "value"].iloc[0]  # noqa: E731
+    start = date("start_date")                  # post-Diwali, assumed 9 Nov 2026 (NPCI to notify)
+    later = date("start_date_alternative")      # if it slips again to 1 Jan 2027
+    original = date("start_date_original")      # the original 15 Oct 2026 plan, for comparison
     base = {
-        "name": "Base: starts 15 Oct 2026",
+        "name": "Base: starts after Diwali (9 Nov 2026, assumed)",
         "rate_pct": rule("mdr_rate_standard"),  # confirmed
         "cap_inr": rule("mdr_cap"),  # confirmed
         "flat_fee_inr": rule("flat_fee_sectors"),  # confirmed
         "gst_pct": rule("gst_on_mdr"),  # unverified
-        "start_date": "2026-10-15",
+        "start_date": start,
         "exempt_share_pct": 10,  # ASSUMPTION
         "flat_sector_share_pct": 10,  # ASSUMPTION
         "flat_sector_avg_ticket_inr": 5000,  # ASSUMPTION
@@ -137,10 +141,11 @@ def build_scenarios(policy: pd.DataFrame) -> list[dict]:
     base = {k: (int(v) if isinstance(v, float) and v.is_integer() else v) for k, v in base.items()}
     return [
         base,
-        {**base, "name": "Deferred: starts 1 Jan 2027", "start_date": "2027-01-01"},
-        {**base, "name": "Deferred + ₹40 lakh turnover exemption", "start_date": "2027-01-01", "exempt_share_pct": 25},
+        {**base, "name": "Delayed again: starts 1 Jan 2027", "start_date": later},
+        {**base, "name": "1 Jan 2027 + ₹40 lakh turnover exemption", "start_date": later, "exempt_share_pct": 25},
         {**base, "name": "More big-ticket payments hit the cap", "capped_share_pct": 30},
         {**base, "name": "Merchants push 20% of big payments off UPI", "shift_away_pct": 20},
+        {**base, "name": "Original plan: 15 Oct 2026 (deferred)", "start_date": original},
     ]
 
 
@@ -219,8 +224,8 @@ def main():
     results = [run_scenario(s, base_cr, p2m_cr) for s in scenarios]
     print(f"  base: ₹{results[0]['pool_month_cr']:,.0f} cr a month, ₹{results[0]['pool_fy27_cr']:,.0f} cr in FY 2026-27")
 
-    alt = policy.loc[policy["parameter"] == "start_date_alternative"].iloc[0]
-    status = f"15 Oct 2026 scheduled; delay to 1 Jan 2027 {alt['status']} ({alt['status_note']})"
+    status = ("Deferred by NPCI on 13 Oct 2026 from 15 Oct to 'immediately post Diwali, on a date to be notified'; "
+              "this site assumes 9 Nov 2026. A further delay to 1 Jan 2027 is shown as a scenario.")
 
     print("4. Exporting JSON for the website")
     newest = max(policy["as_of"].max(), "2026-10-09")  # date the monthly series was collected

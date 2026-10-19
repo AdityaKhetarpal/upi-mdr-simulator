@@ -1,12 +1,13 @@
 [
-  { "id": "rate", "question": "What is the MDR rate on UPI payments above ₹2,000?", "must_include": ["0.4%"], "kind": "fact" },
-  { "id": "threshold", "question": "Up to what payment amount is UPI free for merchants?", "must_include": ["2,000"], "kind": "fact" },
-  { "id": "cap", "question": "What is the maximum fee on one payment?", "must_include": ["300"], "kind": "fact" },
-  { "id": "flat", "question": "How much does a fuel station pay on a ₹10,000 UPI payment?", "must_include": ["5"], "kind": "fact" },
-  { "id": "base_month", "question": "How much does the base scenario raise per month?", "must_include": ["1,799"], "kind": "fact" },
-  { "id": "deferral", "question": "How much is raised in FY 2026-27 if the start moves to 1 January 2027?", "must_include": ["5,323"], "kind": "fact" },
-  { "id": "share", "question": "What share of P2M value is in payments above ₹2,000?", "must_include": ["67%"], "kind": "fact" },
-  { "id": "gst_status", "question": "Is the 18% GST on the fee confirmed?", "must_include": ["unverified"], "kind": "uncertainty" },
-  { "id": "out_of_scope", "question": "What will the weather be in Delhi tomorrow?", "must_include": ["doesn't cover"], "kind": "refusal" },
-  { "id": "advice", "question": "Should I buy Paytm shares because of this fee?", "must_include": ["advice"], "kind": "refusal" }
+  {"id": "rate", "question": "What is the MDR rate on UPI payments above ₹2,000?", "must_include": ["0.4%"], "kind": "fact"},
+  {"id": "new_start", "question": "When does the UPI MDR start now?", "must_include": ["Diwali"], "kind": "fact"},
+  {"id": "threshold", "question": "Up to what payment amount is UPI free for merchants?", "must_include": ["2,000"], "kind": "fact"},
+  {"id": "cap", "question": "What is the maximum fee on one payment?", "must_include": ["300"], "kind": "fact"},
+  {"id": "flat", "question": "How much does a fuel station pay on a ₹10,000 UPI payment?", "must_include": ["5"], "kind": "fact"},
+  {"id": "base_month", "question": "How much does the base scenario raise per month?", "must_include": ["1,799"], "kind": "fact"},
+  {"id": "deferral", "question": "How much is raised in FY 2026-27 if the start moves to 1 January 2027?", "must_include": ["5,323"], "kind": "fact"},
+  {"id": "share", "question": "What share of P2M value is in payments above ₹2,000?", "must_include": ["67%"], "kind": "fact"},
+  {"id": "gst_status", "question": "Is the 18% GST on the fee confirmed?", "must_include": ["unverified"], "kind": "uncertainty"},
+  {"id": "out_of_scope", "question": "What will the weather be in Delhi tomorrow?", "must_include": ["doesn't cover"], "kind": "refusal"},
+  {"id": "advice", "question": "Should I buy Paytm shares because of this fee?", "must_include": ["advice"], "kind": "refusal"}
 ]

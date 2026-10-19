@@ -1,10 +1,10 @@
 [
   {
-    "scenario":"Base: starts 15 Oct 2026",
+    "scenario":"Base: starts after Diwali (9 Nov 2026, assumed)",
     "pool_month_cr":1798.95,
     "pool_year_cr":21587.4,
-    "months_in_fy27":5.5233,
-    "pool_fy27_cr":9936.1184,
+    "months_in_fy27":4.7014,
+    "pool_fy27_cr":8457.5293,
     "gst_month_cr":323.811,
     "merchant_cost_month_cr":2122.761,
     "effective_rate_on_p2m_pct":0.201,
@@ -14,7 +14,7 @@
     "payer_psp_month_cr":179.895
   },
   {
-    "scenario":"Deferred: starts 1 Jan 2027",
+    "scenario":"Delayed again: starts 1 Jan 2027",
     "pool_month_cr":1798.95,
     "pool_year_cr":21587.4,
     "months_in_fy27":2.9589,
@@ -28,7 +28,7 @@
     "payer_psp_month_cr":179.895
   },
   {
-    "scenario":"Deferred + ₹40 lakh turnover exemption",
+    "scenario":"1 Jan 2027 + ₹40 lakh turnover exemption",
     "pool_month_cr":1439.16,
     "pool_year_cr":17269.92,
     "months_in_fy27":2.9589,
@@ -45,8 +45,8 @@
     "scenario":"More big-ticket payments hit the cap",
     "pool_month_cr":1619.055,
     "pool_year_cr":19428.66,
-    "months_in_fy27":5.5233,
-    "pool_fy27_cr":8942.5065,
+    "months_in_fy27":4.7014,
+    "pool_fy27_cr":7611.7764,
     "gst_month_cr":291.4299,
     "merchant_cost_month_cr":1910.4849,
     "effective_rate_on_p2m_pct":0.1809,
@@ -59,8 +59,8 @@
     "scenario":"Merchants push 20% of big payments off UPI",
     "pool_month_cr":1439.16,
     "pool_year_cr":17269.92,
-    "months_in_fy27":5.5233,
-    "pool_fy27_cr":7948.8947,
+    "months_in_fy27":4.7014,
+    "pool_fy27_cr":6766.0235,
     "gst_month_cr":259.0488,
     "merchant_cost_month_cr":1698.2088,
     "effective_rate_on_p2m_pct":0.1608,
@@ -68,5 +68,19 @@
     "acquirer_month_cr":431.748,
     "app_month_cr":287.832,
     "payer_psp_month_cr":143.916
+  },
+  {
+    "scenario":"Original plan: 15 Oct 2026 (deferred)",
+    "pool_month_cr":1798.95,
+    "pool_year_cr":21587.4,
+    "months_in_fy27":5.5233,
+    "pool_fy27_cr":9936.1184,
+    "gst_month_cr":323.811,
+    "merchant_cost_month_cr":2122.761,
+    "effective_rate_on_p2m_pct":0.201,
+    "issuer_month_cr":719.58,
+    "acquirer_month_cr":539.685,
+    "app_month_cr":359.79,
+    "payer_psp_month_cr":179.895
   }
 ]

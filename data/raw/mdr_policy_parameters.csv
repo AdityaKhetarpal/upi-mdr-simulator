@@ -1,13 +1,14 @@
 parameter,value,unit,status,source,as_of,status_note
-mdr_rate_standard,0.4,percent,confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
+mdr_rate_standard,0.4,percent,confirmed,NPCI statement via ANI / Khaleej Times,2026-10-13,unchanged by the 13 Oct deferral (Business Standard)
 threshold_amount,2000,INR per transaction (MDR applies above),confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
 mdr_cap,300,INR per transaction,confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
 cap_reached_at,75000,INR per transaction,confirmed,derived: 300 / 0.004,2026-09-16,
-flat_fee_sectors,5,INR per transaction above 2000 (railways telecom insurance fuel),confirmed,NPCI statement via ANI / Khaleej Times,2026-09-16,
-capital_markets_rate,0.02,percent (cap 300),unverified,fintech skill baseline (DFS/NPCI FAQ 15 Sep) - not re-checked today,2026-09-15,
+flat_fee_sectors,5,INR per transaction above 2000 (railways telecom insurance fuel utilities; reports also list education and agri inputs),confirmed,NPCI statement via ANI / Khaleej Times; Organiser / MediaNama 13-14 Oct 2026,2026-10-14,
+capital_markets_rate,0.02,percent (cap 300),reported,"Organiser / Usthadian, 14-16 Oct 2026",2026-10-14,
 p2pm_receipt_limit,100000,INR per month (3 consecutive months above -> regular P2M),reported,Kotak Neo / Inc42,2026-09-16,
-start_date,2026-10-15,date,confirmed,NPCI FAQ via SCC Online,2026-09-16,scheduled
-start_date_alternative,2027-01-01,date,reported,"BusinessToday / Moneycontrol; BW Businessworld",2026-10-10,NPCI decision pending as of 10 Oct 2026
+start_date_original,2026-10-15,date,confirmed,NPCI FAQ via SCC Online,2026-09-16,deferred by NPCI on 13 Oct 2026
+start_date,2026-11-09,date,reported,NPCI press note 13 Oct 2026 via Business Standard / WION / MediaNama,2026-10-13,NPCI: 'immediately post Diwali on a date to be notified'; 9 Nov (day after Diwali) used as the assumed date
+start_date_alternative,2027-01-01,date,reported,MediaNama (industry asked for January 2027),2026-10-13,industry request; NPCI chose post-Diwali instead - kept as a further-delay scenario
 turnover_exemption,4000000,INR annual turnover (40 lakh),reported,SAG Infotech citing reports,2026-10-08,under consideration
 split_acquirer,30,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,
 split_issuer,40,percent of MDR,unverified,fintech skill baseline (reported),2026-09-15,

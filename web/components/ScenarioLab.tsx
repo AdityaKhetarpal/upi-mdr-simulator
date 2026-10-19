@@ -83,10 +83,10 @@ export default function ScenarioLab() {
         <div className="control">
           <span className="control-top">Start date</span>
           <div className="segmented" role="group" aria-label="Start date" style={{ marginTop: 8 }}>
-            <button type="button" aria-pressed={s.start_date === "2026-10-15"} onClick={() => set("start_date")("2026-10-15")}>15 Oct 2026</button>
+            <button type="button" aria-pressed={s.start_date === "2026-11-09"} onClick={() => set("start_date")("2026-11-09")}>After Diwali</button>
             <button type="button" aria-pressed={s.start_date === "2027-01-01"} onClick={() => set("start_date")("2027-01-01")}>1 Jan 2027</button>
           </div>
-          <p className="hint">Scheduled date, or the delay NPCI is reported to be weighing.</p>
+          <p className="hint">NPCI deferred the fee on 13 Oct to just after Diwali (date to be notified; 9 Nov assumed). 1 Jan 2027 shows a further delay.</p>
         </div>
 
         <Slider label="Fee rate" unit="%" status="confirmed" value={s.rate_pct} min={0} max={1} step={0.05}

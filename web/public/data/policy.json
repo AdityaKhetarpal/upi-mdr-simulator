@@ -12,19 +12,19 @@
     "parameter":"capital_markets_rate",
     "value":"0.02",
     "unit":"percent (cap 300)",
-    "status":"unverified",
+    "status":"reported",
     "status_note":"",
-    "source":"earlier reports (DFS\/NPCI FAQ 15 Sep) - not re-checked today",
-    "as_of":"2026-09-15"
+    "source":"Organiser \/ Usthadian, 14-16 Oct 2026",
+    "as_of":"2026-10-14"
   },
   {
     "parameter":"flat_fee_sectors",
     "value":"5",
-    "unit":"INR per transaction above 2000 (railways telecom insurance fuel)",
+    "unit":"INR per transaction above 2000 (railways telecom insurance fuel utilities; reports also list education and agri inputs)",
     "status":"confirmed",
     "status_note":"",
-    "source":"NPCI statement via ANI \/ Khaleej Times",
-    "as_of":"2026-09-16"
+    "source":"NPCI statement via ANI \/ Khaleej Times; Organiser \/ MediaNama 13-14 Oct 2026",
+    "as_of":"2026-10-14"
   },
   {
     "parameter":"gst_on_mdr",
@@ -49,9 +49,9 @@
     "value":"0.4",
     "unit":"percent",
     "status":"confirmed",
-    "status_note":"",
+    "status_note":"unchanged by the 13 Oct deferral (Business Standard)",
     "source":"NPCI statement via ANI \/ Khaleej Times",
-    "as_of":"2026-09-16"
+    "as_of":"2026-10-13"
   },
   {
     "parameter":"p2m_volume_share_at_or_below_2000",
@@ -109,21 +109,30 @@
   },
   {
     "parameter":"start_date",
-    "value":"2026-10-15",
+    "value":"2026-11-09",
     "unit":"date",
-    "status":"confirmed",
-    "status_note":"scheduled",
-    "source":"NPCI FAQ via SCC Online",
-    "as_of":"2026-09-16"
+    "status":"reported",
+    "status_note":"NPCI: 'immediately post Diwali on a date to be notified'; 9 Nov (day after Diwali) used as the assumed date",
+    "source":"NPCI press note 13 Oct 2026 via Business Standard \/ WION \/ MediaNama",
+    "as_of":"2026-10-13"
   },
   {
     "parameter":"start_date_alternative",
     "value":"2027-01-01",
     "unit":"date",
     "status":"reported",
-    "status_note":"NPCI decision pending as of 10 Oct 2026",
-    "source":"BusinessToday \/ Moneycontrol; BW Businessworld",
-    "as_of":"2026-10-10"
+    "status_note":"industry request; NPCI chose post-Diwali instead - kept as a further-delay scenario",
+    "source":"MediaNama (industry asked for January 2027)",
+    "as_of":"2026-10-13"
+  },
+  {
+    "parameter":"start_date_original",
+    "value":"2026-10-15",
+    "unit":"date",
+    "status":"confirmed",
+    "status_note":"deferred by NPCI on 13 Oct 2026",
+    "source":"NPCI FAQ via SCC Online",
+    "as_of":"2026-09-16"
   },
   {
     "parameter":"threshold_amount",

@@ -43,7 +43,8 @@ export function quickAnswer(question: string): string | null {
   // 2. Start date / delay
   if (has(q, ["january", "jan ", "delay", "defer", "postpon", "start date", "when does", "when will"])) {
     const now = results[0], later = results[1];
-    return `The fee is scheduled to start on 15 Oct 2026. A delay to 1 Jan 2027 is reported but not confirmed by NPCI. Starting in October raises about ${cr(now.pool_fy27_cr)} in FY 2026-27 (${now.months_in_fy27.toFixed(1)} months); starting in January raises about ${cr(later.pool_fy27_cr)} (${later.months_in_fy27.toFixed(1)} months). The monthly amount is the same, about ${cr(now.pool_month_cr)} [SCENARIOS]. These are estimates.`;
+    const original = results.find((r) => r.scenario.startsWith("Original"))!;
+    return `The fee was due on 15 Oct 2026, but on 13 Oct NPCI deferred it to "immediately post Diwali", on a date still to be notified; the rates did not change [RULES]. Assuming a 9 Nov start, it raises about ${cr(now.pool_fy27_cr)} in FY 2026-27 (${now.months_in_fy27.toFixed(1)} months), against ${cr(original.pool_fy27_cr)} under the original October plan. If it slips again to 1 Jan 2027, about ${cr(later.pool_fy27_cr)} (${later.months_in_fy27.toFixed(1)} months). The monthly amount is the same, about ${cr(now.pool_month_cr)} [SCENARIOS]. These are estimates.`;
   }
 
   // 3. Who gets the money
