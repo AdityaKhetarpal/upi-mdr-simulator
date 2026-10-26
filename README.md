@@ -28,7 +28,7 @@ Merchants will pay a 0.4% merchant discount rate (MDR) on UPI payments above ₹
 | File | Contents | Source | Status |
 |---|---|---|---|
 | `data/raw/upi_monthly_npci_reported.csv` | UPI volume and value, Sep 2025 to Sep 2026 | NPCI figures via news reports (URL on every row) | Secondary source |
-| `data/raw/mdr_policy_parameters.csv` | 16 fee rules with value, source, date and status | NPCI statement and FAQ, news reports | Each row labelled confirmed / reported / unverified |
+| `data/raw/mdr_policy_parameters.csv` | 17 fee rules with value, source, date and status | NPCI statement and FAQ, news reports | Each row labelled confirmed / reported / unverified |
 | `data/raw/p2m_ticket_bands_npci_reported.csv` | P2M value split by payment size, Aug 2026 | NPCI via Business Today, 17 Sep 2026 | Reported, rounded |
 
 Full source log: [`data/SOURCES.md`](data/SOURCES.md). Only aggregated, published figures are used; no personal data.
@@ -55,7 +55,6 @@ data/raw/*.csv ──► checks ──► DuckDB + SQL ──► scenario engine
 - The system prompt (`web/lib/ask.ts`) limits answers to the supplied data, requires a source block like `[RULES]`, requires flagging reported or unverified figures, and refuses advice.
 - **Works without a key:** common questions (fee on any payment amount, January start, revenue split, yearly total, what's confirmed) are answered instantly from the data by `web/lib/quick-answer.ts`. The AI is used only for other questions, and the site falls back to data answers if the AI fails or a visitor hits the rate limit.
 - Safeguards: the API key stays on the server, questions are limited to 300 characters, and each visitor gets 8 questions per 10 minutes. Set a monthly spend cap in the Anthropic console.
-- **Evaluation:** `web/evals/ask_eval.json` holds 11 questions (8 facts, 1 uncertainty, 2 refusals). Run `npm run eval` with the site running. Latest score: [X]/11 passed, [X]/9 factual answers cited a source.
 
 ## Results (base scenario, estimates not forecasts)
 
