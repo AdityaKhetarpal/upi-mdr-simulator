@@ -1,6 +1,6 @@
 [
   {
-    "name":"Base: starts after Diwali (9 Nov 2026, assumed)",
+    "name":"Base: starts after Diwali (9 Nov 2026, assumed - not yet notified)",
     "rate_pct":0.4,
     "cap_inr":300,
     "flat_fee_inr":5,
@@ -15,7 +15,8 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   },
   {
     "name":"Delayed again: starts 1 Jan 2027",
@@ -33,15 +34,16 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   },
   {
-    "name":"1 Jan 2027 + ₹40 lakh turnover exemption",
+    "name":"What-if: ₹40 lakh turnover exemption (reported, not adopted)",
     "rate_pct":0.4,
     "cap_inr":300,
     "flat_fee_inr":5,
     "gst_pct":18,
-    "start_date":"2027-01-01",
+    "start_date":"2026-11-09",
     "exempt_share_pct":25,
     "flat_sector_share_pct":10,
     "flat_sector_avg_ticket_inr":5000,
@@ -51,7 +53,8 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   },
   {
     "name":"More big-ticket payments hit the cap",
@@ -69,7 +72,8 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   },
   {
     "name":"Merchants push 20% of big payments off UPI",
@@ -87,7 +91,8 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   },
   {
     "name":"Original plan: 15 Oct 2026 (deferred)",
@@ -105,6 +110,7 @@
     "split_issuer_pct":40,
     "split_acquirer_pct":30,
     "split_app_pct":20,
-    "split_payer_psp_pct":10
+    "split_payer_psp_pct":10,
+    "fund_pct":5
   }
 ]

@@ -128,5 +128,15 @@
     "value_mom_pct":-1.5,
     "source_name":"StartupTalky (citing NPCI)",
     "source_url":"https:\/\/startuptalky.com\/upi-transactions-september-2026\/"
+  },
+  {
+    "month":"2026-10",
+    "volume_mn":25470.0,
+    "value_cr":3153000.0,
+    "avg_ticket_inr":1238.0,
+    "volume_mom_pct":5.8,
+    "value_mom_pct":7.4,
+    "source_name":"Entrackr (citing NPCI)",
+    "source_url":"https:\/\/entrackr.com\/news\/upi-hits-record-2547-bn-transactions-in-october-daily-value-crosses-rs-1-lakh-crore-12772871"
   }
 ]

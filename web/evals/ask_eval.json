@@ -1,6 +1,8 @@
 [
   {"id": "rate", "question": "What is the MDR rate on UPI payments above ₹2,000?", "must_include": ["0.4%"], "kind": "fact"},
   {"id": "new_start", "question": "When does the UPI MDR start now?", "must_include": ["Diwali"], "kind": "fact"},
+  {"id": "not_notified", "question": "Has NPCI announced the exact start date for UPI MDR?", "must_include": ["not"], "kind": "uncertainty"},
+  {"id": "fund", "question": "What share of the fee goes to the small-merchant fund?", "must_include": ["5%"], "kind": "fact"},
   {"id": "threshold", "question": "Up to what payment amount is UPI free for merchants?", "must_include": ["2,000"], "kind": "fact"},
   {"id": "cap", "question": "What is the maximum fee on one payment?", "must_include": ["300"], "kind": "fact"},
   {"id": "flat", "question": "How much does a fuel station pay on a ₹10,000 UPI payment?", "must_include": ["5"], "kind": "fact"},

@@ -86,17 +86,17 @@ export default function ScenarioLab() {
             <button type="button" aria-pressed={s.start_date === "2026-11-09"} onClick={() => set("start_date")("2026-11-09")}>After Diwali</button>
             <button type="button" aria-pressed={s.start_date === "2027-01-01"} onClick={() => set("start_date")("2027-01-01")}>1 Jan 2027</button>
           </div>
-          <p className="hint">NPCI deferred the fee on 13 Oct to just after Diwali (date to be notified; 9 Nov assumed). 1 Jan 2027 shows a further delay.</p>
+          <p className="hint">NPCI deferred the fee on 13 Oct to just after Diwali. As of 5 Nov no date has been notified, so 9 Nov is assumed. 1 Jan 2027 shows a further delay.</p>
         </div>
 
         <Slider label="Fee rate" unit="%" status="confirmed" value={s.rate_pct} min={0} max={1} step={0.05}
           hint="NPCI set 0.4%." onChange={set("rate_pct")} />
         <Slider label="Exempt merchants" unit="%" status="assumption" value={s.exempt_share_pct} min={0} max={60} step={5}
-          hint="Share of above-₹2,000 value from small merchants who stay free." onChange={set("exempt_share_pct")} />
+          hint="Share of above-₹2,000 value from small merchants who stay free (under ₹1 lakh a month). Try 25% for the reported ₹40 lakh turnover exemption, which was not adopted." onChange={set("exempt_share_pct")} />
         <Slider label="Hits the ₹300 cap" unit="%" status="assumption" value={s.capped_share_pct} min={0} max={50} step={5}
           hint="Share of above-₹2,000 value in payments of ₹75,000 or more." onChange={set("capped_share_pct")} />
         <Slider label="Flat ₹5 sectors" unit="%" status="assumption" value={s.flat_sector_share_pct} min={0} max={30} step={5}
-          hint="Fuel, telecom, insurance and railways." onChange={set("flat_sector_share_pct")} />
+          hint="Railways, telecom, insurance, fuel, farm inputs and utilities." onChange={set("flat_sector_share_pct")} />
         <Slider label="Moved off UPI" unit="%" status="assumption" value={s.shift_away_pct} min={0} max={50} step={5}
           hint="Big payments that shops push to cash or split into smaller ones." onChange={set("shift_away_pct")} />
 
@@ -124,9 +124,9 @@ export default function ScenarioLab() {
                 <p className="stat-note">{r.months_in_fy27.toFixed(1)} months of fees</p>
               </div>
               <div className="stat">
-                <p className="stat-label">Merchants really pay</p>
+                <p className="stat-label">Average fee on all merchant takings</p>
                 <p className="stat-value">{r.effective_rate_on_p2m_pct.toFixed(2)}%</p>
-                <p className="stat-note">of all UPI merchant takings</p>
+                <p className="stat-note">This site&apos;s estimate, not an NPCI figure</p>
               </div>
             </div>
 
@@ -140,12 +140,13 @@ export default function ScenarioLab() {
                 max={BASE_RESULT.issuer_month_cr * 1.6}
                 rows={[
                   { label: "Customer's bank", sub: "Issuing bank, 40%", value: r.issuer_month_cr, display: crore(r.issuer_month_cr) },
-                  { label: "Merchant's bank", sub: "Acquiring bank, 30%", value: r.acquirer_month_cr, display: crore(r.acquirer_month_cr) },
-                  { label: "Payment app", sub: "20%", value: r.app_month_cr, display: crore(r.app_month_cr) },
-                  { label: "Payer's PSP bank", sub: "10%", value: r.payer_psp_month_cr, display: crore(r.payer_psp_month_cr) },
+                  { label: "Merchant's bank", sub: "Acquirer or payment aggregator, 30%", value: r.acquirer_month_cr, display: crore(r.acquirer_month_cr) },
+                  { label: "Payment app", sub: "PhonePe, Google Pay…, 20%", value: r.app_month_cr, display: crore(r.app_month_cr) },
+                  { label: "App's sponsor bank", sub: "PSP bank, 10%", value: r.payer_psp_month_cr, display: crore(r.payer_psp_month_cr) },
+                  { label: "Small-merchant fund", sub: "5% of every share", value: r.fund_month_cr, display: crore(r.fund_month_cr) },
                 ]}
               />
-              <p className="note">The 40/30/20/10 split and 18% GST are reported but not confirmed. Estimates, not forecasts.</p>
+              <p className="note">The 40/30/20/10 split is reported from NPCI&apos;s circular; the 5% fund is confirmed; the 18% GST is unverified. Each player&apos;s bar is after its 5% fund contribution. Estimates, not forecasts.</p>
             </div>
           </>
         )}

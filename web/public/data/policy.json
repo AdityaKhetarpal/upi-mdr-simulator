@@ -6,25 +6,25 @@
     "status":"confirmed",
     "status_note":"",
     "source":"derived: 300 \/ 0.004",
-    "as_of":"2026-09-16"
+    "as_of":"2026-09-15"
   },
   {
     "parameter":"capital_markets_rate",
     "value":"0.02",
     "unit":"percent (cap 300)",
-    "status":"reported",
-    "status_note":"",
-    "source":"Organiser \/ Usthadian, 14-16 Oct 2026",
-    "as_of":"2026-10-14"
+    "status":"confirmed",
+    "status_note":"mutual funds and securities \/ broker payments",
+    "source":"PIB release and Finance Ministry FAQ (15 Sep 2026)",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"flat_fee_sectors",
     "value":"5",
-    "unit":"INR per transaction above 2000 (railways telecom insurance fuel utilities; reports also list education and agri inputs)",
+    "unit":"INR per transaction above 2000 (railways telecom insurance fuel agricultural inputs and utilities)",
     "status":"confirmed",
-    "status_note":"",
-    "source":"NPCI statement via ANI \/ Khaleej Times; Organiser \/ MediaNama 13-14 Oct 2026",
-    "as_of":"2026-10-14"
+    "status_note":"education: 'flat-fee or capped' with no figure yet (FAQ Q42)",
+    "source":"PIB release (15 Sep 2026); Finance Ministry FAQ Q41",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"gst_on_mdr",
@@ -32,8 +32,17 @@
     "unit":"percent",
     "status":"unverified",
     "status_note":"",
-    "source":"earlier reports (reported)",
+    "source":"earlier reports",
     "as_of":"2026-09-15"
+  },
+  {
+    "parameter":"incentive_budget_fy27",
+    "value":"2000",
+    "unit":"INR crore (BHIM-UPI and RuPay incentive scheme FY 2026-27)",
+    "status":"confirmed",
+    "status_note":"reported likely to be withdrawn when MDR starts (CNBC \/ ET Now via KNN 19 Sep 2026) - no notification yet",
+    "source":"Union Budget 2026-27 via YourStory",
+    "as_of":"2026-02-01"
   },
   {
     "parameter":"mdr_cap",
@@ -41,89 +50,98 @@
     "unit":"INR per transaction",
     "status":"confirmed",
     "status_note":"",
-    "source":"NPCI statement via ANI \/ Khaleej Times",
-    "as_of":"2026-09-16"
+    "source":"NPCI circular OC-237 and PIB release (15 Sep 2026)",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"mdr_rate_standard",
     "value":"0.4",
     "unit":"percent",
     "status":"confirmed",
-    "status_note":"unchanged by the 13 Oct deferral (Business Standard)",
-    "source":"NPCI statement via ANI \/ Khaleej Times",
-    "as_of":"2026-10-13"
+    "status_note":"unchanged; NPCI's Supreme Court affidavit (reported 5 Nov 2026) describes it as 'not exceeding 0.4%'",
+    "source":"NPCI circular OC-237 and PIB \/ Finance Ministry release (15 Sep 2026)",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"p2m_volume_share_at_or_below_2000",
-    "value":"95",
-    "unit":"percent of merchant txn volume (more than)",
+    "value":"96",
+    "unit":"percent of merchant txn volume (about)",
     "status":"confirmed",
-    "status_note":"",
-    "source":"NPCI FAQ via SCC Online",
-    "as_of":"2026-09-16"
+    "status_note":"'about 4% of P2M transactions' pay MDR",
+    "source":"PIB release (15 Sep 2026); NPCI Supreme Court affidavit",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"p2pm_receipt_limit",
     "value":"100000",
     "unit":"INR per month (3 consecutive months above -> regular P2M)",
-    "status":"reported",
+    "status":"confirmed",
     "status_note":"",
-    "source":"Kotak Neo \/ Inc42",
-    "as_of":"2026-09-16"
+    "source":"Finance Ministry FAQ Q23-Q29 (15 Sep 2026)",
+    "as_of":"2026-11-05"
+  },
+  {
+    "parameter":"small_merchant_fund",
+    "value":"5",
+    "unit":"percent of each player's MDR share",
+    "status":"confirmed",
+    "status_note":"fund for merchants up to ₹20 lakh turnover (NPCI affidavit); rules to be finalised with RBI",
+    "source":"PIB release and Finance Ministry FAQ (15 Sep 2026)",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"split_acquirer",
     "value":"30",
-    "unit":"percent of MDR",
-    "status":"unverified",
-    "status_note":"",
-    "source":"earlier reports (reported)",
+    "unit":"percent of MDR (merchant's bank or aggregator)",
+    "status":"reported",
+    "status_note":"payment aggregators reportedly negotiating for part of this share",
+    "source":"Moneycontrol citing NPCI circular OC-237",
     "as_of":"2026-09-15"
   },
   {
     "parameter":"split_app",
     "value":"20",
-    "unit":"percent of MDR",
-    "status":"unverified",
+    "unit":"percent of MDR (UPI app such as PhonePe or Google Pay)",
+    "status":"reported",
     "status_note":"",
-    "source":"earlier reports (reported)",
+    "source":"Moneycontrol citing NPCI circular OC-237",
     "as_of":"2026-09-15"
   },
   {
     "parameter":"split_issuer",
     "value":"40",
-    "unit":"percent of MDR",
-    "status":"unverified",
+    "unit":"percent of MDR (customer's bank)",
+    "status":"reported",
     "status_note":"",
-    "source":"earlier reports (reported)",
+    "source":"Moneycontrol citing NPCI circular OC-237",
     "as_of":"2026-09-15"
   },
   {
     "parameter":"split_payer_psp",
     "value":"10",
-    "unit":"percent of MDR",
-    "status":"unverified",
+    "unit":"percent of MDR (the app's sponsor PSP bank)",
+    "status":"reported",
     "status_note":"",
-    "source":"earlier reports (reported)",
+    "source":"Moneycontrol citing NPCI circular OC-237",
     "as_of":"2026-09-15"
   },
   {
     "parameter":"start_date",
     "value":"2026-11-09",
     "unit":"date",
-    "status":"reported",
-    "status_note":"NPCI: 'immediately post Diwali on a date to be notified'; 9 Nov (day after Diwali) used as the assumed date",
-    "source":"NPCI press note 13 Oct 2026 via Business Standard \/ WION \/ MediaNama",
-    "as_of":"2026-10-13"
+    "status":"unverified",
+    "status_note":"not notified as of 5 Nov 2026 - NPCI said only 'immediately post Diwali on a date to be notified'; 9 Nov (day after Diwali) is this site's assumption",
+    "source":"NPCI press release 13 Oct 2026; NPCI FAQ updated 15 Oct 2026",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"start_date_alternative",
     "value":"2027-01-01",
     "unit":"date",
     "status":"reported",
-    "status_note":"industry request; NPCI chose post-Diwali instead - kept as a further-delay scenario",
-    "source":"MediaNama (industry asked for January 2027)",
-    "as_of":"2026-10-13"
+    "status_note":"was under consideration before NPCI chose post-Diwali - kept as a further-delay scenario",
+    "source":"Business Standard (8 Oct 2026)",
+    "as_of":"2026-10-08"
   },
   {
     "parameter":"start_date_original",
@@ -131,8 +149,8 @@
     "unit":"date",
     "status":"confirmed",
     "status_note":"deferred by NPCI on 13 Oct 2026",
-    "source":"NPCI FAQ via SCC Online",
-    "as_of":"2026-09-16"
+    "source":"Finance Ministry FAQ Q5 (15 Sep 2026)",
+    "as_of":"2026-09-15"
   },
   {
     "parameter":"threshold_amount",
@@ -140,16 +158,16 @@
     "unit":"INR per transaction (MDR applies above)",
     "status":"confirmed",
     "status_note":"",
-    "source":"NPCI statement via ANI \/ Khaleej Times",
-    "as_of":"2026-09-16"
+    "source":"NPCI circular OC-237 and PIB release (15 Sep 2026)",
+    "as_of":"2026-11-05"
   },
   {
     "parameter":"turnover_exemption",
     "value":"4000000",
     "unit":"INR annual turnover (40 lakh)",
     "status":"reported",
-    "status_note":"under consideration",
-    "source":"SAG Infotech citing reports",
-    "as_of":"2026-10-08"
+    "status_note":"considered but not adopted - not in NPCI's 13 Oct statement or its Nov Supreme Court affidavit; shown only as a what-if",
+    "source":"Business Standard (8 Oct 2026)",
+    "as_of":"2026-11-05"
   }
 ]

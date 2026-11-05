@@ -32,7 +32,17 @@ describe("matches Python for every scenario", () => {
       expect(ts.pool_fy27_cr).toBeCloseTo(py.pool_fy27_cr, 2);
       expect(ts.effective_rate_on_p2m_pct).toBeCloseTo(py.effective_rate_on_p2m_pct, 3);
       expect(ts.issuer_month_cr).toBeCloseTo(py.issuer_month_cr, 2);
+      expect(ts.fund_month_cr).toBeCloseTo(py.fund_month_cr, 2);
     });
+  });
+});
+
+describe("who gets paid", () => {
+  it("the four players plus the 5% small-merchant fund add up to the whole fee", () => {
+    const r = runScenario(inputs[0] as Scenario, BASE_CR, P2M_CR);
+    const parts = r.issuer_month_cr + r.acquirer_month_cr + r.app_month_cr + r.payer_psp_month_cr + r.fund_month_cr;
+    expect(parts).toBeCloseTo(r.pool_month_cr, 6);
+    expect(r.fund_month_cr).toBeCloseTo(r.pool_month_cr * 0.05, 6);
   });
 });
 

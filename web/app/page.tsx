@@ -25,12 +25,16 @@ const RULES: [string, string, (v: string) => string][] = [
   ["mdr_rate_standard", "Fee rate", (v) => `${v}% of the payment`],
   ["threshold_amount", "Free up to", (v) => `₹${Number(v).toLocaleString("en-IN")} per payment`],
   ["mdr_cap", "Maximum fee per payment", (v) => `₹${v}, reached at ₹75,000`],
-  ["flat_fee_sectors", "Fuel, telecom, insurance, rail", (v) => `Flat ₹${v} per payment above ₹2,000`],
+  ["flat_fee_sectors", "Rail, telecom, insurance, fuel, farm inputs, utilities", (v) => `Flat ₹${v} per payment above ₹2,000`],
+  ["capital_markets_rate", "Mutual funds, stocks, brokers", (v) => `${v}% of the payment, capped at ₹300`],
   ["p2pm_receipt_limit", "Small merchants stay free", (v) => `Until they receive ₹${Number(v).toLocaleString("en-IN")}+ a month for 3 months`],
+  ["small_merchant_fund", "Small-merchant fund", (v) => `${v}% of every player's share of the fee`],
   ["start_date_original", "Original start date", (v) => `${dateText(v)} (deferred)`],
-  ["start_date", "New start date", (v) => `After Diwali, to be notified (${dateText(v)} assumed)`],
+  ["start_date", "New start date", (v) => `Not yet notified; "immediately post Diwali" (${dateText(v)} assumed)`],
   ["start_date_alternative", "If delayed again", (v) => dateText(v)],
-  ["turnover_exemption", "Turnover exemption", () => "Businesses under ₹40 lakh a year"],
+  ["turnover_exemption", "Turnover exemption (not adopted)", () => "Businesses under ₹40 lakh a year was considered"],
+  ["split_issuer", "Who gets the fee", () => "Customer's bank 40%, merchant's bank 30%, app 20%, app's bank 10%"],
+  ["incentive_budget_fy27", "Government incentive, FY 2026-27", (v) => `₹${Number(v).toLocaleString("en-IN")} crore budgeted`],
   ["gst_on_mdr", "GST on the fee", (v) => `${v}% on top of the fee`],
 ];
 
@@ -56,7 +60,8 @@ export default function Home() {
       <h1>Above ₹2,000, UPI stops being free for merchants.</h1>
       <p className="lead">
         A 0.4% merchant fee was due on 15 October 2026. On 13 October NPCI deferred it to &ldquo;immediately post Diwali&rdquo;,
-        on a date still to be notified. The rates did not change, and customers still pay nothing. Try a payment to see what the shop pays.
+        and as of 5 November no start date has been notified. The rates have not changed, customers still pay nothing, and NPCI is
+        defending the fee in the Supreme Court, which refused to pause it. Try a payment to see what the shop pays.
       </p>
       <FeeCalculator />
 
@@ -78,9 +83,9 @@ export default function Home() {
             <p className="stat-note">Likely between {crore(LOW)} and {crore(HIGH)}</p>
           </div>
           <div className="stat">
-            <p className="stat-label">What merchants really pay</p>
+            <p className="stat-label">Average fee on all merchant takings</p>
             <p className="stat-value">{base.effective_rate_on_p2m_pct.toFixed(2)}%</p>
-            <p className="stat-note">of all their UPI takings, not 0.4%</p>
+            <p className="stat-note">This site&apos;s estimate, not an NPCI figure. One shop pays 0% to 0.4%, depending on its payment sizes.</p>
           </div>
         </div>
 
@@ -118,7 +123,7 @@ export default function Home() {
           </ul>
           <p className="note">
             Payments above ₹2,000 are only about 4% of merchant payments by count, but 67% of the money.
-            Source: NPCI via Business Today, 17 Sep 2026 (rounded figures).
+            Source: NPCI via Business Today, 17 Sep 2026 (rounded figures). September 2026 data showed the same 4% and 67% (NPCI via MediaNama, 5 Oct).
           </p>
         </div>
 

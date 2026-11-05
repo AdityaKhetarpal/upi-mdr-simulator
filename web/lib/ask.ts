@@ -47,7 +47,8 @@ ${rules}
 
 [SCENARIOS] Scenario engine results (estimates, not forecasts)
 Base assumptions: ${base.exempt_share_pct}% of above-₹2,000 value exempt, ${base.capped_share_pct}% hits the ₹300 cap (average ₹${base.capped_avg_ticket_inr.toLocaleString("en-IN")}), ${base.flat_sector_share_pct}% in flat ₹5 sectors (average ₹${base.flat_sector_avg_ticket_inr.toLocaleString("en-IN")}), ${base.shift_away_pct}% moved off UPI. These shares are the project's assumptions, not published data.
-Revenue split assumed: issuer ${base.split_issuer_pct}%, acquirer ${base.split_acquirer_pct}%, app ${base.split_app_pct}%, payer PSP ${base.split_payer_psp_pct}% (unverified).
+Revenue split (reported from NPCI's circular): issuer ${base.split_issuer_pct}%, acquirer ${base.split_acquirer_pct}%, app ${base.split_app_pct}%, app's sponsor PSP bank ${base.split_payer_psp_pct}%; each gives ${base.fund_pct}% of its share to the small-merchant fund (confirmed). Player amounts below are after that contribution.
+Start date: not notified as of 5 Nov 2026 (NPCI: "immediately post Diwali"); 9 Nov 2026 is this site's assumption. The ₹40 lakh turnover exemption was considered but not adopted.
 ${scen}
 Sensitivity: a full year ranges from about ${cr(range.low)} (30% exempt, 30% capped) to ${cr(range.high)} (0% exempt, 5% capped).
 

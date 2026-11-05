@@ -96,7 +96,7 @@ export default function FeeCalculator() {
           <span className="field-label">Merchant type</span>
           <div className="segmented" role="group" aria-label="Merchant type">
             <button type="button" aria-pressed={kind === "standard"} onClick={() => setKind("standard")}>Most shops</button>
-            <button type="button" aria-pressed={kind === "flat"} onClick={() => setKind("flat")}>Fuel, telecom, rail</button>
+            <button type="button" aria-pressed={kind === "flat"} onClick={() => setKind("flat")}>Rail, fuel, telecom, utilities</button>
           </div>
         </div>
 

@@ -6,7 +6,7 @@ How much India's new UPI merchant fee costs a payment, how much it raises nation
 
 ## The problem
 
-Merchants will pay a 0.4% merchant discount rate (MDR) on UPI payments above ₹2,000, capped at ₹300, with a flat ₹5 for fuel, telecom, insurance and railways. Customers still pay nothing. The fee was due on 15 October 2026; on 13 October NPCI deferred it to "immediately post Diwali", on a date still to be notified, with no change to the rates. Merchants, fintech analysts and policy readers need to know three things: what one payment costs, how big the total fee pool is, and how confident we can be in each number.
+Merchants will pay a 0.4% merchant discount rate (MDR) on UPI payments above ₹2,000, capped at ₹300, with a flat ₹5 for railways, telecom, insurance, fuel, farm inputs and utilities, and 0.02% for capital-market payments. Customers still pay nothing. The fee was due on 15 October 2026; on 13 October NPCI deferred it to "immediately post Diwali". As of 5 November 2026 no start date has been notified and the rates are unchanged; NPCI is defending the fee in the Supreme Court, which refused to pause it. Merchants, fintech analysts and policy readers need to know three things: what one payment costs, how big the total fee pool is, and how confident we can be in each number.
 
 ## Who it's for
 
@@ -60,13 +60,15 @@ data/raw/*.csv ──► checks ──► DuckDB + SQL ──► scenario engine
 
 - Fee pool: **₹1,799 crore a month**, ₹21,587 crore a year (range ₹13,672 to ₹25,905 crore depending on assumptions).
 - FY 2026-27: ₹8,458 crore with a post-Diwali start (9 Nov 2026 assumed), ₹5,323 crore if delayed again to 1 Jan 2027, against ₹9,936 crore under the original 15 Oct plan.
-- Merchants pay about **0.20% of all UPI takings**, not 0.4%, because 33% of P2M value is in payments of ₹2,000 or less.
+- The fee averages about **0.20% of all merchant UPI takings** in the base estimate (this project's estimate, not an NPCI figure), not 0.4%, because 33% of P2M value is in payments of ₹2,000 or less and some value is exempt, capped or flat-fee. A single shop pays anywhere from 0% to 0.4%.
+- Of each month's fee, about ₹90 crore goes to the small-merchant fund (5% of every player's share).
 
 ## Limitations
 
 - One month (Aug 2026) of ticket-size data drives every estimate.
 - Exempt share, cap share and average tickets are assumptions; the range shows their effect.
-- The 40/30/20/10 revenue split and 18% GST are reported, not official.
+- The 40/30/20/10 revenue split comes from media reports of NPCI's circular; the 18% GST is unverified.
+- NPCI has not notified the start date (checked 5 Nov 2026); 9 Nov 2026 is an assumption. The ₹40 lakh turnover exemption was considered but not adopted, so it is only a what-if scenario.
 - Monthly figures come from news reports citing NPCI and still need checking against NPCI's own page.
 
 ## Run it yourself

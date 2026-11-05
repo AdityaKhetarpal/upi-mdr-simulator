@@ -19,7 +19,7 @@ const ASSUMPTIONS: [string, string, string][] = [
   ["Share of above-₹2,000 value from exempt merchants", `${BASE.exempt_share_pct}%`, "Not published. Small merchants (P2PM) and any turnover exemption stay free."],
   ["Share of above-₹2,000 value in payments of ₹75,000+", `${BASE.capped_share_pct}%`, "Not published. These payments pay the ₹300 cap instead of 0.4%."],
   ["Average capped payment", `₹${BASE.capped_avg_ticket_inr.toLocaleString("en-IN")}`, "Sets how many payments pay ₹300."],
-  ["Share in flat ₹5 sectors", `${BASE.flat_sector_share_pct}%`, "Fuel, telecom, insurance and railways."],
+  ["Share in flat ₹5 sectors", `${BASE.flat_sector_share_pct}%`, "Railways, telecom, insurance, fuel, farm inputs and utilities."],
   ["Average payment in flat ₹5 sectors", `₹${BASE.flat_sector_avg_ticket_inr.toLocaleString("en-IN")}`, "Sets how many ₹5 fees are charged."],
   ["Ticket-size split held constant", "August 2026", "Only one month of NPCI's split is public, so every month uses it."],
 ];
@@ -110,7 +110,9 @@ export default function MethodPage() {
         <ul className="limits">
           <li>One month of ticket-size data drives every estimate, so seasonal changes in big payments are missed.</li>
           <li>Exempt shares, cap shares and average tickets are assumptions; the yearly pool is shown as a range for that reason.</li>
-          <li>The revenue split and 18% GST come from reports, not official notices.</li>
+          <li>The 40/30/20/10 revenue split comes from media reports of NPCI&apos;s circular, and the 18% GST is unverified.</li>
+          <li>NPCI has not notified the start date (checked 5 Nov 2026); 9 Nov 2026 is an assumption.</li>
+          <li>The average fee on all merchant takings is this site&apos;s estimate, not an NPCI figure.</li>
           <li>The model doesn&apos;t predict how merchants and customers change behaviour beyond the &quot;moved off UPI&quot; slider.</li>
         </ul>
       </section>

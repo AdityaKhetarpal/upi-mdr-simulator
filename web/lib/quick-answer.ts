@@ -44,13 +44,13 @@ export function quickAnswer(question: string): string | null {
   if (has(q, ["january", "jan ", "delay", "defer", "postpon", "start date", "when does", "when will"])) {
     const now = results[0], later = results[1];
     const original = results.find((r) => r.scenario.startsWith("Original"))!;
-    return `The fee was due on 15 Oct 2026, but on 13 Oct NPCI deferred it to "immediately post Diwali", on a date still to be notified; the rates did not change [RULES]. Assuming a 9 Nov start, it raises about ${cr(now.pool_fy27_cr)} in FY 2026-27 (${now.months_in_fy27.toFixed(1)} months), against ${cr(original.pool_fy27_cr)} under the original October plan. If it slips again to 1 Jan 2027, about ${cr(later.pool_fy27_cr)} (${later.months_in_fy27.toFixed(1)} months). The monthly amount is the same, about ${cr(now.pool_month_cr)} [SCENARIOS]. These are estimates.`;
+    return `The fee was due on 15 Oct 2026, but on 13 Oct NPCI deferred it to "immediately post Diwali". As of 5 Nov 2026 no start date has been notified, and the rates have not changed [RULES]. Assuming a 9 Nov start, it raises about ${cr(now.pool_fy27_cr)} in FY 2026-27 (${now.months_in_fy27.toFixed(1)} months), against ${cr(original.pool_fy27_cr)} under the original October plan. If it slips again to 1 Jan 2027, about ${cr(later.pool_fy27_cr)} (${later.months_in_fy27.toFixed(1)} months). The monthly amount is the same, about ${cr(now.pool_month_cr)} [SCENARIOS]. These are estimates.`;
   }
 
   // 3. Who gets the money
   if (has(q, ["split", "who gets", "who receives", "who earns", "bank", "share of the fee", "app get"])) {
     const r = results[0];
-    return `Of about ${cr(r.pool_month_cr)} a month: the customer's bank gets ${cr(r.issuer_month_cr)} (40%), the merchant's bank ${cr(r.acquirer_month_cr)} (30%), the payment app ${cr(r.app_month_cr)} (20%) and the payer's PSP bank ${cr(r.payer_psp_month_cr)} (10%) [SCENARIOS]. This split is reported, not confirmed.`;
+    return `Of about ${cr(r.pool_month_cr)} a month, after each player puts 5% of its share into the small-merchant fund (${cr(r.fund_month_cr)}): the customer's bank gets ${cr(r.issuer_month_cr)} (40% share), the merchant's bank or aggregator ${cr(r.acquirer_month_cr)} (30%), the payment app ${cr(r.app_month_cr)} (20%) and the app's sponsor bank ${cr(r.payer_psp_month_cr)} (10%) [SCENARIOS]. The 40/30/20/10 split is reported from NPCI's circular; the 5% fund is confirmed.`;
   }
 
   // 4. Confirmed vs assumed
@@ -68,13 +68,13 @@ export function quickAnswer(question: string): string | null {
 
   // 6. The basic rules
   if (has(q, ["rate", "cap", "maximum", "threshold", "free", "how much is the fee", "what is mdr", "mdr"])) {
-    return `Merchants pay 0.4% on UPI payments above ₹2,000, capped at ₹300 per payment (reached at ₹75,000). Fuel, telecom, insurance and railway payments above ₹2,000 pay a flat ₹5. Payments up to ₹2,000 and person-to-person transfers stay free, and customers pay nothing [RULES].`;
+    return `Merchants pay 0.4% on UPI payments above ₹2,000, capped at ₹300 per payment (reached at ₹75,000). Railways, telecom, insurance, fuel, farm-input and utility payments above ₹2,000 pay a flat ₹5, and capital-market payments pay 0.02% (capped at ₹300). Payments up to ₹2,000, person-to-person transfers and small merchants receiving under ₹1 lakh a month stay free, and customers pay nothing [RULES]. The start date has not been notified yet.`;
   }
 
   // 7. Why merchants pay less than 0.4% overall
   if (has(q, ["effective", "really pay", "actually pay", "average"])) {
     const r = runScenario(BASE, BASE_CR, P2M_CR);
-    return `Across all their UPI takings, merchants pay about ${r.effective_rate_on_p2m_pct.toFixed(2)}%, not 0.4%, because ${100 - above.share_of_p2m_value_pct}% of merchant payment value is in payments of ₹2,000 or less, which stay free [BANDS][SCENARIOS].`;
+    return `Across all merchants' UPI takings, the fee averages about ${r.effective_rate_on_p2m_pct.toFixed(2)}% in this site's base estimate (not an NPCI figure), not 0.4%, because ${100 - above.share_of_p2m_value_pct}% of merchant payment value is in payments of ₹2,000 or less, which stay free [BANDS][SCENARIOS].`;
   }
 
   return null; // not one we can answer without the AI

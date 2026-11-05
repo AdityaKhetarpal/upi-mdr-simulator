@@ -98,6 +98,7 @@ def run_scenario(s, base_cr, p2m_cr):
         + capped_fee_cr(capped_cr, s["capped_avg_ticket_inr"], s["rate_pct"], s["cap_inr"])
     )
     months = months_active(s["start_date"])
+    keep = 1 - s["fund_pct"] / 100
     return {
         "scenario": s["name"],
         "pool_month_cr": pool_month,
@@ -107,10 +108,12 @@ def run_scenario(s, base_cr, p2m_cr):
         "gst_month_cr": pool_month * s["gst_pct"] / 100,
         "merchant_cost_month_cr": pool_month * (1 + s["gst_pct"] / 100),
         "effective_rate_on_p2m_pct": pool_month / p2m_cr * 100,
-        "issuer_month_cr": pool_month * s["split_issuer_pct"] / 100,
-        "acquirer_month_cr": pool_month * s["split_acquirer_pct"] / 100,
-        "app_month_cr": pool_month * s["split_app_pct"] / 100,
-        "payer_psp_month_cr": pool_month * s["split_payer_psp_pct"] / 100,
+        # each player gives 5% of its share to the small-merchant fund (PIB / NPCI FAQ)
+        "issuer_month_cr": pool_month * s["split_issuer_pct"] / 100 * keep,
+        "acquirer_month_cr": pool_month * s["split_acquirer_pct"] / 100 * keep,
+        "app_month_cr": pool_month * s["split_app_pct"] / 100 * keep,
+        "payer_psp_month_cr": pool_month * s["split_payer_psp_pct"] / 100 * keep,
+        "fund_month_cr": pool_month * s["fund_pct"] / 100,
     }
 
 
@@ -121,7 +124,7 @@ def build_scenarios(policy: pd.DataFrame) -> list[dict]:
     later = date("start_date_alternative")      # if it slips again to 1 Jan 2027
     original = date("start_date_original")      # the original 15 Oct 2026 plan, for comparison
     base = {
-        "name": "Base: starts after Diwali (9 Nov 2026, assumed)",
+        "name": "Base: starts after Diwali (9 Nov 2026, assumed - not yet notified)",
         "rate_pct": rule("mdr_rate_standard"),  # confirmed
         "cap_inr": rule("mdr_cap"),  # confirmed
         "flat_fee_inr": rule("flat_fee_sectors"),  # confirmed
@@ -137,12 +140,13 @@ def build_scenarios(policy: pd.DataFrame) -> list[dict]:
         "split_acquirer_pct": rule("split_acquirer"),
         "split_app_pct": rule("split_app"),
         "split_payer_psp_pct": rule("split_payer_psp"),
+        "fund_pct": rule("small_merchant_fund"),  # confirmed
     }
     base = {k: (int(v) if isinstance(v, float) and v.is_integer() else v) for k, v in base.items()}
     return [
         base,
         {**base, "name": "Delayed again: starts 1 Jan 2027", "start_date": later},
-        {**base, "name": "1 Jan 2027 + ₹40 lakh turnover exemption", "start_date": later, "exempt_share_pct": 25},
+        {**base, "name": "What-if: ₹40 lakh turnover exemption (reported, not adopted)", "exempt_share_pct": 25},
         {**base, "name": "More big-ticket payments hit the cap", "capped_share_pct": 30},
         {**base, "name": "Merchants push 20% of big payments off UPI", "shift_away_pct": 20},
         {**base, "name": "Original plan: 15 Oct 2026 (deferred)", "start_date": original},
@@ -154,7 +158,7 @@ def self_test(scenarios, base_cr, p2m_cr):
     base = scenarios[0]
     assert run_scenario({**base, "rate_pct": 0, "flat_fee_inr": 0}, base_cr, p2m_cr)["pool_month_cr"] == 0
     r = run_scenario(base, base_cr, p2m_cr)
-    players = r["issuer_month_cr"] + r["acquirer_month_cr"] + r["app_month_cr"] + r["payer_psp_month_cr"]
+    players = r["issuer_month_cr"] + r["acquirer_month_cr"] + r["app_month_cr"] + r["payer_psp_month_cr"] + r["fund_month_cr"]
     assert abs(players - r["pool_month_cr"]) < 1e-6, "player split does not add up to the pool"
     assert run_scenario(scenarios[1], base_cr, p2m_cr)["pool_fy27_cr"] < r["pool_fy27_cr"], "later start should raise less"
 
@@ -224,11 +228,11 @@ def main():
     results = [run_scenario(s, base_cr, p2m_cr) for s in scenarios]
     print(f"  base: ₹{results[0]['pool_month_cr']:,.0f} cr a month, ₹{results[0]['pool_fy27_cr']:,.0f} cr in FY 2026-27")
 
-    status = ("Deferred by NPCI on 13 Oct 2026 from 15 Oct to 'immediately post Diwali, on a date to be notified'; "
-              "this site assumes 9 Nov 2026. A further delay to 1 Jan 2027 is shown as a scenario.")
+    status = ("Deferred by NPCI on 13 Oct 2026 from 15 Oct to 'immediately post Diwali, on a date to be notified'. "
+              "As of 5 Nov 2026 no date has been notified; this site assumes 9 Nov 2026. A further delay to 1 Jan 2027 is shown as a scenario.")
 
     print("4. Exporting JSON for the website")
-    newest = max(policy["as_of"].max(), "2026-10-09")  # date the monthly series was collected
+    newest = max(policy["as_of"].max(), "2026-11-05")  # date the rules and monthly series were last checked
     export(con, scenarios, results, status, newest)
     con.close()
     print("Done.")

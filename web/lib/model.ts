@@ -19,6 +19,7 @@ export type Scenario = {
   split_acquirer_pct: number;
   split_app_pct: number;
   split_payer_psp_pct: number;
+  fund_pct: number; // % of each player's share paid into the small-merchant fund (5%, confirmed)
 };
 
 // Everything the engine returns (same names as the Python result)
@@ -35,6 +36,7 @@ export type Result = {
   acquirer_month_cr: number;
   app_month_cr: number;
   payer_psp_month_cr: number;
+  fund_month_cr: number;
 };
 
 const CRORE = 1e7; // 1 crore = 10,000,000 rupees
@@ -82,6 +84,7 @@ export function runScenario(s: Scenario, baseCr: number, p2mCr: number): Result 
     cappedFeeCr(cappedCr, s.capped_avg_ticket_inr, s.rate_pct, s.cap_inr);
 
   const months = monthsActive(s.start_date);
+  const keep = 1 - s.fund_pct / 100; // each player keeps 95% of its share; 5% goes to the small-merchant fund
   return {
     scenario: s.name,
     pool_month_cr: poolMonth,
@@ -91,10 +94,11 @@ export function runScenario(s: Scenario, baseCr: number, p2mCr: number): Result 
     gst_month_cr: (poolMonth * s.gst_pct) / 100,
     merchant_cost_month_cr: poolMonth * (1 + s.gst_pct / 100),
     effective_rate_on_p2m_pct: (poolMonth / p2mCr) * 100,
-    issuer_month_cr: (poolMonth * s.split_issuer_pct) / 100,
-    acquirer_month_cr: (poolMonth * s.split_acquirer_pct) / 100,
-    app_month_cr: (poolMonth * s.split_app_pct) / 100,
-    payer_psp_month_cr: (poolMonth * s.split_payer_psp_pct) / 100,
+    issuer_month_cr: ((poolMonth * s.split_issuer_pct) / 100) * keep,
+    acquirer_month_cr: ((poolMonth * s.split_acquirer_pct) / 100) * keep,
+    app_month_cr: ((poolMonth * s.split_app_pct) / 100) * keep,
+    payer_psp_month_cr: ((poolMonth * s.split_payer_psp_pct) / 100) * keep,
+    fund_month_cr: (poolMonth * s.fund_pct) / 100,
   };
 }
 
@@ -111,7 +115,7 @@ export type PaymentFee = {
 };
 
 // The confirmed NPCI rules: free up to ₹2,000; above that 0.4% capped at ₹300,
-// or a flat ₹5 for railways, telecom, insurance and fuel. GST (18%, unverified) on top.
+// or a flat ₹5 for railways, telecom, insurance, fuel, farm inputs and utilities. GST (18%, unverified) on top.
 export function feeForPayment(
   amountInr: number,
   kind: MerchantKind,
@@ -126,7 +130,7 @@ export function feeForPayment(
   if (amountInr > thresholdInr) {
     if (kind === "flat") {
       fee = flatInr;
-      reason = `Flat ₹${flatInr} for railways, telecom, insurance and fuel`;
+      reason = `Flat ₹${flatInr} for railways, telecom, insurance, fuel, farm inputs and utilities`;
     } else if ((amountInr * ratePct) / 100 >= capInr) {
       fee = capInr;
       reason = `${ratePct}% would be more than ₹${capInr}, so the cap applies`;
