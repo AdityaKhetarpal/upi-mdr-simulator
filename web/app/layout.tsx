@@ -5,6 +5,7 @@ import "@fontsource-variable/bricolage-grotesque"; // headline font
 import "@fontsource-variable/hanken-grotesk"; // body font
 import "./globals.css";
 import Nav from "@/components/Nav";
+import SiteMark from "@/components/SiteMark";
 import meta from "@/public/data/meta.json";
 
 const SITE = "https://upi-mdr-simulator.vercel.app";
@@ -43,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="site-header">
           <div className="wrap">
             <Link href="/" className="site-name">
-              <span className="site-mark" aria-hidden="true" />
+              <SiteMark />
               UPI MDR Impact Simulator
             </Link>
             <Nav />
