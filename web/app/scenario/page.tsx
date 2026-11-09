@@ -1,7 +1,14 @@
 // Scenario lab page: a short intro, then the interactive sliders
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd } from "@/lib/seo";
 import ScenarioLab from "@/components/ScenarioLab";
 
-export const metadata = { title: "Scenario lab · UPI Merchant Discount Rate (MDR) Impact Simulator" };
+export const metadata = {
+  title: "Scenario lab",
+  description:
+    "Change the UPI Merchant Discount Rate (MDR) assumptions (start date, exempt merchants, payments hitting the ₹300 cap) and see the yearly fee pool and each player's share update.",
+  alternates: { canonical: "/scenario" },
+};
 
 export default function ScenarioPage() {
   return (
@@ -12,6 +19,7 @@ export default function ScenarioPage() {
         Change those assumptions and watch the totals move.
       </p>
       <ScenarioLab />
+      <JsonLd data={breadcrumbLd("Scenario lab", "/scenario")} />
     </>
   );
 }
