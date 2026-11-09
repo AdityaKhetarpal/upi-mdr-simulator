@@ -201,7 +201,7 @@ def export(con, scenarios, results, start_date_status, data_updated):
     save_json(pd.DataFrame(results).round(4), "scenario_results")
 
     meta = {
-        "project": "UPI MDR Impact Simulator",
+        "project": "UPI Merchant Discount Rate (MDR) Impact Simulator",
         "data_updated": data_updated,  
         "start_date_status": start_date_status,
         "disclaimer": "Analysis and education only. Not investment, legal or business advice.",

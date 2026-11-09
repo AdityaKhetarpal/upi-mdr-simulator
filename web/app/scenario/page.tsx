@@ -1,7 +1,7 @@
 // Scenario lab page: a short intro, then the interactive sliders
 import ScenarioLab from "@/components/ScenarioLab";
 
-export const metadata = { title: "Scenario lab · UPI MDR Impact Simulator" };
+export const metadata = { title: "Scenario lab · UPI Merchant Discount Rate (MDR) Impact Simulator" };
 
 export default function ScenarioPage() {
   return (

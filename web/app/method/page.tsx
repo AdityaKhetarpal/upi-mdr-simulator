@@ -3,7 +3,7 @@ import inputs from "@/public/data/scenario_inputs.json";
 import policy from "@/public/data/policy.json";
 import trend from "@/public/data/monthly_trend.json";
 
-export const metadata = { title: "Method · UPI MDR Impact Simulator" };
+export const metadata = { title: "Method · UPI Merchant Discount Rate (MDR) Impact Simulator" };
 
 // the steps really are a sequence, so they are numbered
 const STEPS = [

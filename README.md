@@ -1,4 +1,4 @@
-# UPI MDR Impact Simulator
+# UPI Merchant Discount Rate (MDR) Impact Simulator
 
 How much India's new UPI merchant fee costs a payment, how much it raises nationally, and who gets paid.
 

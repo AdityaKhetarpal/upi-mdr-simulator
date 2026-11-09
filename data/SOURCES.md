@@ -1,4 +1,4 @@
-# Data sources — UPI MDR Impact Simulator
+# Data sources — UPI Merchant Discount Rate (MDR) Impact Simulator
 
 Log of every file in `data/raw/`: where it came from, when, and its status.
 
@@ -12,7 +12,7 @@ Log of every file in `data/raw/`: where it came from, when, and its status.
 - Terms: news articles; we use only the numbers, with attribution.
 
 ## mdr_policy_parameters.csv
-- What: UPI MDR rules (rate, threshold, cap, sector fees, exemptions, revenue split, GST).
+- What: UPI Merchant Discount Rate (MDR) rules (rate, threshold, cap, sector fees, exemptions, revenue split, GST).
 - Where: NPCI statement (16 Sep 2026) as reported by ANI; NPCI FAQ as summarised by SCC Online; later news on deferral and exemptions.
 - Collected: 9 Oct 2026.
 - Status: each row has its own label: confirmed / reported / unverified.

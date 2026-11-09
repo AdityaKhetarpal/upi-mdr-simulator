@@ -62,7 +62,7 @@ ${months}
 [STATUS] Data updated ${meta.data_updated}. Start date: ${meta.start_date_status}.`;
 }
 
-export const SYSTEM_PROMPT = `You answer questions about India's UPI merchant discount rate (MDR) for the "UPI MDR Impact Simulator" website.
+export const SYSTEM_PROMPT = `You answer questions about India's UPI merchant discount rate (MDR) for the "UPI Merchant Discount Rate (MDR) Impact Simulator" website.
 
 Rules:
 1. Use ONLY the data between <data> tags. Never use outside knowledge for numbers, dates or rules.

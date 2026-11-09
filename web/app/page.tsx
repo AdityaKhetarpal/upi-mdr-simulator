@@ -59,7 +59,7 @@ export default function Home() {
       {/* ---------- hero: one payment ---------- */}
       <h1>Above ₹2,000, UPI stops being free for merchants.</h1>
       <p className="lead">
-        A 0.4% merchant fee was due on 15 October 2026. On 13 October NPCI deferred it to &ldquo;immediately post Diwali&rdquo;,
+        A 0.4% Merchant Discount Rate (MDR), a fee shops pay on each UPI payment, was due on 15 October 2026. On 13 October NPCI deferred it to &ldquo;immediately post Diwali&rdquo;,
         and as of 5 November no start date has been notified. The rates have not changed, customers still pay nothing, and NPCI is
         defending the fee in the Supreme Court, which refused to pause it. Try a payment to see what the shop pays.
       </p>

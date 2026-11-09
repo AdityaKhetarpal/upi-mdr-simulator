@@ -9,25 +9,25 @@ import SiteMark from "@/components/SiteMark";
 import meta from "@/public/data/meta.json";
 
 const SITE = "https://upi-mdr-simulator.vercel.app";
-const ONE_LINER = "What India's new UPI merchant fee (MDR) costs each payment, how much it raises in total, and who gets the money.";
+const ONE_LINER = "What India's new UPI Merchant Discount Rate (MDR) costs each payment, how much it raises in total, and who gets the money.";
 
 // Title, one-line description and preview image used when the link is shared (WhatsApp, LinkedIn, X, Slack...).
 // The image itself is app/opengraph-image.jpg (and twitter-image.jpg); Next.js adds its tags automatically.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: "UPI MDR Impact Simulator",
+  title: "UPI Merchant Discount Rate (MDR) Impact Simulator",
   description: ONE_LINER,
   openGraph: {
     type: "website",
     url: SITE,
-    siteName: "UPI MDR Impact Simulator",
-    title: "UPI MDR Impact Simulator: the real price of UPI's 0.4% fee",
+    siteName: "UPI Merchant Discount Rate (MDR) Impact Simulator",
+    title: "UPI Merchant Discount Rate (MDR) Impact Simulator: the real price of UPI's 0.4% fee",
     description: ONE_LINER,
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "UPI MDR Impact Simulator: the real price of UPI's 0.4% fee",
+    title: "UPI Merchant Discount Rate (MDR) Impact Simulator: the real price of UPI's 0.4% fee",
     description: ONE_LINER,
   },
 };
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="wrap">
             <Link href="/" className="site-name">
               <SiteMark />
-              UPI MDR Impact Simulator
+              UPI Merchant Discount Rate (MDR) Impact Simulator
             </Link>
             <Nav />
           </div>

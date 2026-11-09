@@ -1,4 +1,4 @@
-/* UPI MDR Impact Simulator — design tokens and styles (plain CSS, no Tailwind)
+/* UPI Merchant Discount Rate (MDR) Impact Simulator — design tokens and styles (plain CSS, no Tailwind)
    Idea: the ₹2,000 line is the hero. Blue = money that moves free, orange = money that pays the fee. */
 
 :root {

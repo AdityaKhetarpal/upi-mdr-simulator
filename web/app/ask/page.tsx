@@ -1,7 +1,7 @@
 // Ask the data: plain-English questions answered by an AI that may only use this project's data
 import AskBox from "@/components/AskBox";
 
-export const metadata = { title: "Ask the data · UPI MDR Impact Simulator" };
+export const metadata = { title: "Ask the data · UPI Merchant Discount Rate (MDR) Impact Simulator" };
 
 export default function AskPage() {
   return (
