@@ -1,9 +1,16 @@
 // Method: how the numbers are made, what is assumed, where every figure comes from
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd } from "@/lib/seo";
 import inputs from "@/public/data/scenario_inputs.json";
 import policy from "@/public/data/policy.json";
 import trend from "@/public/data/monthly_trend.json";
 
-export const metadata = { title: "Method · UPI Merchant Discount Rate (MDR) Impact Simulator" };
+export const metadata = {
+  title: "Method",
+  description:
+    "How the UPI Merchant Discount Rate (MDR) estimates are built: the data pipeline, every assumption, all sources with dates, and the limitations.",
+  alternates: { canonical: "/method" },
+};
 
 // the steps really are a sequence, so they are numbered
 const STEPS = [
@@ -116,6 +123,7 @@ export default function MethodPage() {
           <li>The model doesn&apos;t predict how merchants and customers change behaviour beyond the &quot;moved off UPI&quot; slider.</li>
         </ul>
       </section>
+      <JsonLd data={breadcrumbLd("Method", "/method")} />
     </>
   );
 }

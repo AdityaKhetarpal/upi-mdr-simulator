@@ -92,6 +92,22 @@ p { margin: 0; }
 .footer-links a { color: var(--accent); text-decoration: none; font-weight: 500; }
 .footer-links a:hover { text-decoration: underline; }
 .footer-note { margin-top: 12px; }
+.footer-by a { color: inherit; text-decoration: none; }
+.footer-by a:hover strong { text-decoration: underline; }
+.footer-more-title { margin-top: 20px; color: var(--ink-2); font-weight: 600; }
+.footer-more { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.footer-more a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.footer-more a:hover { text-decoration: underline; }
+
+/* ---------- byline, FAQ, plain lists ---------- */
+.byline { color: var(--ink-3); font-size: 0.9rem; margin-top: 10px; }
+.byline a { color: var(--accent); text-decoration: none; }
+.byline a:hover { text-decoration: underline; }
+.faq { display: grid; gap: 20px; }
+.faq-item h3 { font-size: 1.05rem; color: var(--ink); }
+.faq-item p { color: var(--ink-2); margin-top: 6px; max-width: 75ch; }
+.list-plain { margin-top: 20px; padding-left: 20px; display: grid; gap: 8px; }
+.list-plain a { color: var(--accent); }
 
 /* ---------- page sections ---------- */
 main.wrap { padding-top: 48px; }

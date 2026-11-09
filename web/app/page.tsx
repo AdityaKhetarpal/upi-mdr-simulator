@@ -1,24 +1,68 @@
-// Overview page: one payment first (the hero), then the national totals, then the rules
+// Overview page: one payment first (the hero), then the national totals, then the rules, then the FAQ
+import Link from "next/link";
 import FeeCalculator from "@/components/FeeCalculator";
 import TrendChart from "@/components/TrendChart";
 import HBars from "@/components/HBars";
-import { sensitivityRange, type Scenario } from "@/lib/model";
+import Faq from "@/components/Faq";
+import JsonLd from "@/components/JsonLd";
 import results from "@/public/data/scenario_results.json";
-import inputs from "@/public/data/scenario_inputs.json";
 import policy from "@/public/data/policy.json";
 import bands from "@/public/data/p2m_bands.json";
 import trend from "@/public/data/monthly_trend.json";
+import meta from "@/public/data/meta.json";
+import { RANGE, UPDATED } from "@/lib/facts";
+import { upiFaq } from "@/lib/faq";
+import { SITE_URL, SITE_NAME, REPO_URL, HUB_URL, PERSON_LD } from "@/lib/seo";
+
+// What Google shows for this page. The title leads with the words people search ("UPI MDR calculator").
+export const metadata = {
+  title: { absolute: "UPI Merchant Discount Rate (MDR) Calculator & Impact Simulator" },
+  description:
+    "Work out the UPI Merchant Discount Rate (MDR) on any payment: 0.4% above ₹2,000, capped at ₹300. Plus what the fee raises in India and who gets it.",
+  alternates: { canonical: "/" },
+};
 
 // ₹21587.4 -> "₹21,587 cr"
 const crore = (v: number) => "₹" + Math.round(v).toLocaleString("en-IN") + " cr";
 
-// starting numbers from NPCI's August 2026 data
-const above2000 = bands.find((b) => b.band === "above_2000")!;
-const BASE_CR = above2000.band_value_cr;
-const P2M_CR = (above2000.band_value_cr * 100) / above2000.share_of_p2m_value_pct;
-
 // the same sensitivity grid as notebook 4_model: exempt 0-30%, capped 5-30%
-const { low: LOW, high: HIGH } = sensitivityRange(inputs[0] as Scenario, BASE_CR, P2M_CR);
+const { low: LOW, high: HIGH } = RANGE;
+
+// This page as structured data: a free web app, built on a dataset, by Aditya
+const PAGE_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#app`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description:
+        "Calculator and scenario model for India's UPI Merchant Discount Rate (MDR): the fee on any payment, the national fee pool and who gets the money.",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Any (web browser)",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+      inLanguage: "en-IN",
+      dateModified: meta.data_updated,
+      author: { "@id": PERSON_LD["@id"] },
+      codeRepository: REPO_URL,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    },
+    {
+      "@type": "Dataset",
+      name: "UPI Merchant Discount Rate (MDR) rules and UPI monthly figures",
+      description:
+        "Monthly UPI volume and value (September 2025 onward), merchant payment value by ticket size, and every UPI MDR rule with its value, source, date and status (confirmed, reported or unverified).",
+      url: `${SITE_URL}/method`,
+      sameAs: `${REPO_URL}/tree/main/data`,
+      creator: { "@id": PERSON_LD["@id"] },
+      dateModified: meta.data_updated,
+      spatialCoverage: "India",
+      keywords: ["UPI", "MDR", "merchant discount rate", "NPCI", "digital payments", "India"],
+    },
+  ],
+};
 
 // the rules shown in the table: [data key, plain name, how to show the value]
 const RULES: [string, string, (v: string) => string][] = [
@@ -62,6 +106,10 @@ export default function Home() {
         A 0.4% Merchant Discount Rate (MDR), a fee shops pay on each UPI payment, was due on 15 October 2026. On 13 October NPCI deferred it to &ldquo;immediately post Diwali&rdquo;,
         and as of 5 November no start date has been notified. The rates have not changed, customers still pay nothing, and NPCI is
         defending the fee in the Supreme Court, which refused to pause it. Try a payment to see what the shop pays.
+      </p>
+      <p className="byline">
+        By <a href={HUB_URL} rel="author">Aditya Khetarpal</a> · Updated <time dateTime={meta.data_updated}>{UPDATED}</time> ·{" "}
+        <Link href="/method">Sources and method</Link>
       </p>
       <FeeCalculator />
 
@@ -184,6 +232,11 @@ export default function Home() {
           </table>
         </div>
       </section>
+
+      {/* ---------- questions people search, answered from the data above ---------- */}
+      <Faq items={upiFaq()} title="UPI MDR: questions people ask" />
+
+      <JsonLd data={PAGE_LD} />
     </>
   );
 }

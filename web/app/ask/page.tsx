@@ -1,7 +1,14 @@
 // Ask the data: plain-English questions answered by an AI that may only use this project's data
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd } from "@/lib/seo";
 import AskBox from "@/components/AskBox";
 
-export const metadata = { title: "Ask the data · UPI Merchant Discount Rate (MDR) Impact Simulator" };
+export const metadata = {
+  title: "Ask the data",
+  description:
+    "Ask plain-English questions about India's UPI Merchant Discount Rate (MDR). Answers use only this site's sourced rules and scenarios, and name the data they used.",
+  alternates: { canonical: "/ask" },
+};
 
 export default function AskPage() {
   return (
@@ -17,6 +24,7 @@ export default function AskPage() {
         wrong, so check against the Overview and Scenario lab. AI questions are sent to Anthropic to produce the
         answer; this site doesn&apos;t store them.
       </p>
+      <JsonLd data={breadcrumbLd("Ask the data", "/ask")} />
     </>
   );
 }
