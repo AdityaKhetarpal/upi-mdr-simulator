@@ -7,6 +7,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import SiteMark from "@/components/SiteMark";
 import meta from "@/public/data/meta.json";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const SITE = "https://upi-mdr-simulator.vercel.app";
 const ONE_LINER = "What India's new UPI Merchant Discount Rate (MDR) costs each payment, how much it raises in total, and who gets the money.";
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <p className="footer-note">Data as of {dateText(meta.data_updated)}. For analysis and education, not financial advice.</p>
           </div>
         </footer>
+        <SpeedInsights />
       </body>
     </html>
   );
